@@ -2,6 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://kit.fontawesome.com/d9058ae961.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="public/css/bootstrap.css" />
         <link type="text/css" rel="stylesheet" href="public/css/style.css" />
