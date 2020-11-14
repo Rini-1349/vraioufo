@@ -124,10 +124,22 @@ try
             }
             
         }
+        elseif ($action == 'category')
+        {
+            if (isset($_GET['categoryId']) AND ((int)$_GET['categoryId'] !== 0))
+            {
+                listPostsByCategory($_GET['categoryId']);
+            }
+            else
+            {
+                homepage();
+            }
+        }
         else
         {
             homepage();
         }
+        
     }
     else 
     {

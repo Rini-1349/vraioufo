@@ -5,7 +5,7 @@ require_once('Manager.php');
 class Posts extends Manager
 {
 
-    public function listPosts()
+    public function listPosts($category = null)
     {
         $userId = 0;
         if (isset($_SESSION['id']))
@@ -13,6 +13,15 @@ class Posts extends Manager
             $userId = $_SESSION['id'];
         } 
         
+        if ($category)
+        {
+            $whereCategory = 'WHERE posts.category_id = ' . $category . ' ';
+        }
+        else
+        {
+            $whereCategory = '';
+        }
+   
         $db = $this->dbConnect();
         $posts = $db->query('SELECT posts.id AS id,
                             posts.title AS title,
@@ -22,12 +31,14 @@ class Posts extends Manager
                             users.pseudo AS pseudo,
                             users.id AS user_id,
                             categories.id AS category_id,
+                            categories.title AS category_title,
                             votes.value AS vote
                             FROM posts
                             LEFT JOIN categories ON categories.id = posts.category_id
                             LEFT JOIN users ON users.id = posts.user_id
-                            LEFT JOIN votes ON (votes.post_id = posts.id AND votes.user_id = ' . $userId . ')
-                            ORDER BY created DESC');
+                            LEFT JOIN votes ON (votes.post_id = posts.id AND votes.user_id = ' . $userId . ') ' .
+                            $whereCategory .
+                            'ORDER BY created DESC');
                                                         
         return $posts;
     }

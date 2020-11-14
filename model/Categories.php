@@ -13,23 +13,12 @@ class Categories extends Manager
         return $categories;
     }
 
-    protected function viewCategory($id)
+    public function getCategory($categoryId)
     {
-
-    }
-
-    protected function editCategory($id)
-    {
-
-    }
-
-    protected function addCategory()
-    {
-
-    }
-
-    protected function deleteCategory($id)
-    {
+        $db = $this->dbConnect();
+        $category = $db->query('SELECT * FROM categories 
+                                WHERE id = ' . $categoryId);
         
+        return $category->fetch();
     }
 }

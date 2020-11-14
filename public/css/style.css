@@ -83,17 +83,48 @@ thead {
     background-color: #d1d1d1;
 }
 
-tbody th:nth-child(1), tbody td:nth-child(1) {
-    width: 50%;
+
+/* Tableau derniers articles */
+.last_posts th:nth-child(1), .last_posts td:nth-child(1) {
+    width: 40%;
 }
 
-tbody th:nth-child(2), tbody td:nth-child(2) {
+.last_posts th:nth-child(2), .last_posts td:nth-child(2) {
+    width: 10%;
+}
+
+.last_posts th:nth-child(3), .last_posts td:nth-child(3) {
     width: 20%;
 }
 
-tbody th:nth-child(3), tbody td:nth-child(3) {
+.last_posts th:nth-child(4), .last_posts td:nth-child(4) {
     width: 30%;
 }
+
+
+/* Tableau des catégories */
+.categories_list th:nth-child(1), .categories td:nth-child(1) {
+    width: 30%;
+}
+
+.categories_list th:nth-child(2), .categories td:nth-child(2) {
+    width: 80%;
+}
+
+
+/* Tableau des articles par catégorie */
+.posts_category th:nth-child(1), .posts_category td:nth-child(1) {
+    width: 50%;
+}
+
+.posts_category th:nth-child(2), .posts_category td:nth-child(2) {
+    width: 20%;
+}
+
+.posts_category th:nth-child(3), .posts_category td:nth-child(3) {
+    width: 30%;
+}
+
 
 .category {
     font-size: 1.5em;

@@ -1,4 +1,4 @@
-<?php $title = 'Accueil'; ?>
+<?php $title = 'Categorie'; ?>
 
 <?php ob_start(); ?>
 
@@ -18,18 +18,16 @@
                     <thead>
                         <tr>
                             <th colspan="2">
-                                <div class="category">Les catégories</div>
+                                <div class="category">La catégorie</div>
                             </th>
                         </tr>
                     </thead>
             
                     <tbody>
-                        <?php foreach ($categories as $category): ?>
                         <tr>
-                            <th><a href="index.php?action=category&categoryId=<?= $category['id'] ?>"><?= $category['title'] ?></a></th>
+                            <th><?= $category['title'] ?></th>
                             <th><?= $category['description'] ?></th>
                         </tr>
-                        <?php endforeach ?>  
                     </tbody>             
                 </table>
             </div>
@@ -38,11 +36,11 @@
  
         <div class="row">
             <div class="col-12 table-responsive">
-                <table class="table table-striped table-hover table-bordered last_posts">
+                <table class="table table-striped table-hover table-bordered posts_category">
                     <thead>
                         <tr>
-                            <th colspan="4">
-                                <div class="category">Les derniers articles</div>
+                            <th colspan="3">
+                                <div class="category">Les articles de la catégorie</div>
                             </th>
                         </tr>
                     </thead>
@@ -50,13 +48,12 @@
                     <tbody>
                         <tr>
                             <th></th>
-                            <th>Catégorie</th>
                             <th>Créé par</th>
                             <th>Vrai oufo ?</th>
                         </tr>
 
 
-                        <?php foreach ($listPosts as $post):
+                        <?php foreach ($postsByCategory as $post):
 
                             $tdClass = null;
 
@@ -143,9 +140,6 @@
                             <td>
                                 <div class="title"><i class="fas fa-comment"></i><?= htmlspecialchars($post['title']) ?></div>
                                 <div><?= htmlspecialchars($post['content']) ?></div>
-                            </td>
-                            <td>
-                                <div class="title"><a href="index.php?action=category&categoryId=<?= $post['category_id'] ?>"><?= htmlspecialchars($post['category_title']) ?></a></div>
                             </td>
                             <td>
                                 <div><?= htmlspecialchars($post['pseudo']) ?>

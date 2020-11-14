@@ -118,3 +118,15 @@ function submitVote(array $vote)
         echo 'C\'est mon article';
     }
 }
+
+function listPostsByCategory($categoryId)
+{
+    $posts = new Posts();
+    $postsByCategory = $posts->listPosts($categoryId);
+
+    
+    $categories = new Categories();
+    $category = $categories->getCategory($categoryId);
+
+    require('view/frontend/categoryView.php');
+}
