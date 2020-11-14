@@ -1,0 +1,104 @@
+@font-face {
+    font-family: 'adam_cg_pro';
+    src: url("../fonts/ADAMCGPRO.eot"); /* IE9 Compat Modes */
+    src: url("../fonts/ADAMCGPRO.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+      url("../fonts/ADAMCGPRO.otf") format("opentype"), /* Open Type Font */
+      url("../fonts/ADAMCGPRO.svg") format("svg"), /* Legacy iOS */
+      url("../fonts/ADAMCGPRO.ttf") format("truetype"), /* Safari, Android, iOS */
+      url("../fonts/ADAMCGPRO.woff") format("woff"), /* Modern Browsers */
+      url("../fonts/ADAMCGPRO.woff2") format("woff2"); /* Modern Browsers */
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'the_truth_of_a_thousand_lies/';
+    src: url("../fonts/the_truth_of_a_thousand_lies/TheTruthofaThousandLies.eot"); /* IE9 Compat Modes */
+    src: /*url("../fonts/the_truth_of_a_thousand_lies//ADAMCGPRO.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+      /*url("../fonts/the_truth_of_a_thousand_lies//ADAMCGPRO.otf") format("opentype"), /* Open Type Font */
+      url("../fonts/the_truth_of_a_thousand_lies/TheTruthofaThousandLies.svg") format("svg"), /* Legacy iOS */
+      url("../fonts/the_truth_of_a_thousand_lies/TheTruthofaThousandLies.ttf") format("truetype"), /* Safari, Android, iOS */
+      url("../fonts/the_truth_of_a_thousand_lies/TheTruthofaThousandLies.woff") format("woff"), /* Modern Browsers */
+      url("../fonts/the_truth_of_a_thousand_lies/TheTruthofaThousandLies.woff2") format("woff2"); /* Modern Browsers */
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+/* Header */
+header{
+    border-bottom: 2px solid #8f4a00;
+    padding-top: 1%;
+}
+
+.site-title {
+    font-family: 'the_truth_of_a_thousand_lies/';
+    font-size: 2.3em;
+    color: /*#008f83;*/#f89c2a;
+}
+
+#bobard{
+    /*color: #768f00;*/
+    font-size: 1em;
+}
+
+
+
+.fa-angle-double-up {
+    color: black;
+}
+
+/* Tout */
+.content {
+    margin: 4% 0%;
+
+}
+
+
+
+a, a:hover, a:visited{
+    text-decoration: none;
+    color: #b02907;
+    /*color: #00328f;*/
+}
+
+
+/* Bouton-lien */
+/*.button {
+    background-color: #f89c2a;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+}*/
+
+/* Tableaux */
+
+
+thead {
+    background-color: #d1d1d1;
+}
+
+tbody th:nth-child(1), tbody td:nth-child(1) {
+    width: 50%;
+}
+
+tbody th:nth-child(2), tbody td:nth-child(2) {
+    width: 20%;
+}
+
+tbody th:nth-child(3), tbody td:nth-child(3) {
+    width: 30%;
+}
+
+.category {
+    font-size: 1.5em;
+}
+
+.title {
+    font-size: 1.2em;
+}
