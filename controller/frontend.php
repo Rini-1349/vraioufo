@@ -186,7 +186,7 @@ function deja()
 
     $dejaCount = $deja->dejaCount();
 
-    $randomInt = random_int(0, $dejaCount-1);
+    $randomInt = random_int(1, $dejaCount);
     
     if ($deja = $deja->getDejaContent($randomInt))
     {

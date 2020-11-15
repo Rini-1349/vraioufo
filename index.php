@@ -128,8 +128,11 @@ try
                 {
                     deja();
                 }
-                $message[0] = 'Votre vote n\'a pas pu être enregistré';
-                homepage($message);
+                else
+                {
+                    $message[0] = 'Votre vote n\'a pas pu être enregistré';
+                    homepage($message);
+                }
             }
             
         }
