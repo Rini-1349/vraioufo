@@ -115,6 +115,8 @@
                                         '<td>
                                             <div>Réponse : ' . $true_value . '</div>
                                             <div>J\'ai voté : ' . $vote . '</div>
+                                            <div>' . $responses[$post['id']][1] . ' personnes ont trouvé la bonne réponse </div>
+                                            <div>' . $responses[$post['id']][0] . ' personnes ont répondu faux </div>
                                         </td>';
                                 }
                                 else

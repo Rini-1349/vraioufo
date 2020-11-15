@@ -150,7 +150,15 @@ try
 
                     if ($operation == 'deleteUser' AND isset($_GET['userId']) AND (int)$_GET['userId'] != 0)
                     {
-                        deleteUser($_GET['userId']);
+                        if ($_GET['userId'] !== $_SESSION['id'])
+                        {
+                            deleteUser($_GET['userId']);
+                        }
+                        else
+                        {
+                            $message[0] = 'Vous ne pouvez pas supprimer votre propre compte';
+                            homepageAdmin($message);
+                        }              
                     }
                     elseif ($operation == 'deletePost' AND isset($_GET['postId']) AND (int)$_GET['postId'] != 0)
                     {

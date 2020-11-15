@@ -4,15 +4,15 @@ require_once('Manager.php');
 
 class Votes extends Manager
 {
-
-    protected function listComments()
+    public function getVotesByPost($postId)
     {
+        $db = $this->dbConnect();
+        $votes = $db->prepare('SELECT * FROM votes WHERE post_id = :postId');
+        $votes->execute(array(
+            'postId' => $postId
+        ));
 
-    }
-
-    protected function editComment($id)
-    {
-
+        return $votes;
     }
 
     public function addVote(array $vote)

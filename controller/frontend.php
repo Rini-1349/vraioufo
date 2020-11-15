@@ -8,12 +8,38 @@ require_once('model/Votes.php');
 
 function homepage($message = null)
 {
-    $posts = new Posts();
-    $posts = $posts->listPosts();
+    $post = new Posts();
+    $posts = $post->listPosts();
+    $foundPosts = $post->listPosts();
 
     $categories = new Categories();
     $categories = $categories->listCategories();
 
+    $responses = [];
+
+    foreach ($foundPosts as $post)
+    {
+        $votes = new Votes();
+        $votes = $votes->getVotesByPost($post['id']);
+
+        $trueResponses = 0;
+        $falseResponses = 0;
+
+        foreach ($votes as $vote)
+        {
+            if ($vote['value'] == $post['true_value'])
+            {
+                $trueResponses++;
+            }
+            else
+            {
+                $falseResponses++;
+            }
+        }
+
+        $responses[$post['id']] = [$falseResponses, $trueResponses];
+    }
+    
     require('view/frontend/homepageView.php');
 }
 
