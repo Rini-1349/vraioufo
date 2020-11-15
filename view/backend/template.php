@@ -33,22 +33,25 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <?php if (isset($message[0]))
-                    {
-                    ?>
-                        <div class="col-12 text-danger"><?= $message[0] ?></div>
-                    <?php
-                    }
-                    if (isset($message[1]))
-                    {
-                    ?>
-                        <div class="col-12 text-success"><?= $message[1] ?></div>
-                    <?php
-                    }
-                    ?>
-                </div>
+                <?php if (isset($message[0]))
+                {
+                ?>
+                    <div class="col-12">
+                        <div class="text-danger"><?= $message[0] ?></div>
+                    </div>
+                <?php
+                }
+                if (isset($message[1]))
+                {
+                ?>
+                    <div class="col-12">
+                        <div class="text-success"><?= $message[1] ?></div>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
+            
             <?= $content ?>
         </div>
         <footer>

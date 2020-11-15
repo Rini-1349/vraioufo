@@ -130,6 +130,7 @@
                                             <form action="index.php?action=vote&postId=' . $post['id'] . '" method="post">
                                                 <button type="submit" name="vote" value="0"><i class="fas fa-times-circle"></i></button>
                                             </form>
+                                            <a href="index.php?action=vote&ah=deja">Déjà ?</a>
                                         </div>
                                     </td>';
                                 }

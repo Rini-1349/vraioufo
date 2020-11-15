@@ -51,17 +51,29 @@
         </div>
         <div class="container">
             <div class="row">
-            <div class="col-12">
+                <div class="row">
                     <?php if (isset($message[0]))
                     {
                     ?>
-                        <div class="col-12 text-danger"><?= $message[0] ?></div>
+                        <div class="col-12">
+                            <div class="text-danger"><?= $message[0] ?></div>
+                        </div>
                     <?php
                     }
                     if (isset($message[1]))
                     {
                     ?>
-                        <div class="col-12 text-success"><?= $message[1] ?></div>
+                        <div class="col-12">
+                            <div class="text-success"><?= $message[1] ?></div>
+                        </div>
+                    <?php
+                    }
+                    if (isset($message[2]))
+                    {
+                    ?>
+                        <div class="col-12">
+                            <div class="text-warning"><?= $message[2] ?></div>
+                        </div>
                     <?php
                     }
                     ?>

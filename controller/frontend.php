@@ -3,7 +3,7 @@ require_once('model/Users.php');
 require_once('model/Posts.php');
 require_once('model/Categories.php');
 require_once('model/Votes.php');
-
+require_once('model/Deja.php');
 
 
 function homepage($message = null)
@@ -39,7 +39,7 @@ function homepage($message = null)
 
         $responses[$post['id']] = [$falseResponses, $trueResponses];
     }
-    
+
     require('view/frontend/homepageView.php');
 }
 
@@ -178,4 +178,23 @@ function listPostsByCategory($categoryId)
     $category = $categories->getCategory($categoryId);
 
     require('view/frontend/categoryView.php');
+}
+
+function deja()
+{
+    $deja = new Deja();
+
+    $dejaCount = $deja->dejaCount();
+
+    $randomInt = random_int(0, $dejaCount-1);
+    
+    if ($deja = $deja->getDejaContent($randomInt))
+    {
+        $message[2] = $deja['content'];
+        homepage($message);
+    }
+    else
+    {
+        homepage();
+    }
 }

@@ -124,6 +124,10 @@ try
             }
             else
             {
+                if (isset($_GET['ah']) AND $_GET['ah'] == 'deja')
+                {
+                    deja();
+                }
                 $message[0] = 'Votre vote n\'a pas pu être enregistré';
                 homepage($message);
             }
@@ -183,8 +187,7 @@ try
         else
         {
             homepage();
-        }
-        
+        }      
     }
     else 
     {
