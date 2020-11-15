@@ -39,7 +39,7 @@ function addUser(array $user)
     {
         if ($newUser->addUser($user))
         {
-        //header('Location: index.php?action=homepage');
+        sendConfirmationMail($user);
         connection($user['email'], $user['password']);
         }
     }
@@ -49,6 +49,25 @@ function addUser(array $user)
     }
 }
 
+
+function sendConfirmationMail(array $user)
+{
+    $subject = 'Inscription validée';
+
+    $message = 'Salut ' . $user['first_name'] . "\n" . "\n";
+    $message .= 'Ton inscription sur le site Vrai Oufo a bien été prise en compte' . "\n"; 
+    $message .= 'Tu peux te connecter sur le site avec ton pseudo ou ton adresse mail' . "\n" . "\n";
+    $message .= 'Pour rappel, voici tes informations personnelles : ' . "\n";
+    $message .= 'Pseudo : ' . $user['pseudo'] . "\n";
+    $message .= 'Adresse mail : ' . $user['email'] . "\n" . "\n";
+    $message .= 'A très bientôt !' . "\n";
+
+    $headers = ['From' => 'vraioufo@solangebaron.com',
+    'Reply-To' => 'vraioufo@solangebaron.com',
+    'X-Mailer' => 'PHP/' . phpversion()];
+
+    return mail($user['email'], $subject, $message, $headers);
+}
 
 function connection($login, $pass)
 {
