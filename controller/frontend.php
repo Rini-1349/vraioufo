@@ -6,26 +6,24 @@ require_once('model/Votes.php');
 
 
 
-function homepage($success = null)
+function homepage($message = null)
 {
     $posts = new Posts();
-    $listPosts = $posts->listPosts();
+    $posts = $posts->listPosts();
 
     $categories = new Categories();
     $categories = $categories->listCategories();
 
     require('view/frontend/homepageView.php');
-    
-    // Lister les posts
 }
 
 
-function connectionForm($error = null)
+function connectionForm($message = null)
 {
     require('view/frontend/connectionView.php');
 }
 
-function subscriptionForm($error = null)
+function subscriptionForm($message = null)
 {
     require('view/frontend/subscriptionView.php');
 }
@@ -45,62 +43,68 @@ function addUser(array $user)
     }
     else
     {
-        connectionForm('Pseudo ou adresse mail déjà utilisé(e)');
+        $message[0] = 'Pseudo ou adresse mail déjà utilisé(e)';
+        connectionForm($message);
     }
 }
 
 
 function sendConfirmationMail(array $user)
 {
-    $subject = 'Inscription validée';
+    $subject = '=?UTF-8?B?'.base64_encode('Inscription validée').'?=';
 
-    $message = 'Salut ' . $user['first_name'] . "\n" . "\n";
-    $message .= 'Ton inscription sur le site Vrai Oufo a bien été prise en compte' . "\n"; 
-    $message .= 'Tu peux te connecter sur le site avec ton pseudo ou ton adresse mail' . "\n" . "\n";
-    $message .= 'Pour rappel, voici tes informations personnelles : ' . "\n";
-    $message .= 'Pseudo : ' . $user['pseudo'] . "\n";
-    $message .= 'Adresse mail : ' . $user['email'] . "\n" . "\n";
-    $message .= 'A très bientôt !' . "\n";
+    $mailContent = 'Salut ' . $user['first_name'] . ',' . "\n" . "\n";
+    $mailContent .= 'Ton inscription sur le site Vrai Oufo a bien été prise en compte.' . "\n"; 
+    $mailContent .= 'Tu peux te connecter sur le site avec ton pseudo ou ton adresse mail.' . "\n" . "\n";
+    $mailContent .= 'Pour rappel, voici tes informations personnelles : ' . "\n";
+    $mailContent .= 'Pseudo : ' . $user['pseudo'] . "\n";
+    $mailContent .= 'Adresse mail : ' . $user['email'] . "\n" . "\n";
+    $mailContent .= 'A très bientôt !' . "\n";
 
     $headers = ['From' => 'vraioufo@solangebaron.com',
     'Reply-To' => 'vraioufo@solangebaron.com',
+    'Content-Type: text/plain; charset="utf-8"',
+    'Content-Transfer-Encoding: 8bit',
     'X-Mailer' => 'PHP/' . phpversion()];
 
-    return mail($user['email'], $subject, $message, $headers);
+    return mail($user['email'], $subject, $mailContent, $headers);
 }
 
 function connection($login, $pass)
 {
     $user = new Users();
-    $foundPlayer = $user->getPlayer($login);
+    $foundUser = $user->getUser($login);
 
-    if (!$foundPlayer)
+    if (!$foundUser)
     {
-        connectionForm('Login ou mot de passe incorrect');
+        $message[0] = 'Login ou mot de passe incorrect';
+        connectionForm($message);
     }
     else
     {
-        $isPasswordCorrect = password_verify($pass, $foundPlayer['password']);
+        $isPasswordCorrect = password_verify($pass, $foundUser['password']);
         if ($isPasswordCorrect)
         {
             session_start();
             $_SESSION = array(
-                'id' => $foundPlayer['id'],
-                'name' => $foundPlayer['name'],
-                'first_name' => $foundPlayer['first_name'],
-                'pseudo' => $foundPlayer['pseudo'],
+                'id' => $foundUser['id'],
+                'name' => $foundUser['name'],
+                'first_name' => $foundUser['first_name'],
+                'pseudo' => $foundUser['pseudo'],
+                'role' => $foundUser['role']
             );
             header('Location: index.php?action=homepage');
         }
         else
         {
-            connectionForm('Login ou mot de passe incorrect');
+            $message[0] = 'Login ou mot de passe incorrect';
+            connectionForm($message);
         }
     }
 }
 
 
-function postForm($error = null)
+function postForm($message = null)
 {
     $categories = new Categories();
     $categories = $categories->listCategories();
@@ -134,7 +138,8 @@ function submitVote(array $vote)
     }
     else
     {
-        echo 'C\'est mon article';
+        $message[0] = 'Impossible de voter sur mon article';
+        connectionForm($message);
     }
 }
 
@@ -142,8 +147,7 @@ function listPostsByCategory($categoryId)
 {
     $posts = new Posts();
     $postsByCategory = $posts->listPosts($categoryId);
-
-    
+ 
     $categories = new Categories();
     $category = $categories->getCategory($categoryId);
 

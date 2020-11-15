@@ -43,6 +43,7 @@ class Posts extends Manager
         return $posts;
     }
 
+
     public function isMine(array $vote)
     {
         $db = $this->dbConnect();
@@ -57,6 +58,7 @@ class Posts extends Manager
         return (bool)$postIsMine;
     }
 
+
     public function addPost($newPost)
     {
         $db = $this->dbConnect();
@@ -70,5 +72,46 @@ class Posts extends Manager
         ]);
         
         return $post;
+    }
+
+    public function getPostById($postId)
+    {
+        $db = $this->dbConnect();
+        $post = $db->prepare('SELECT * FROM posts WHERE id = :postId');
+        $post->execute(array(
+            'postId' => $postId
+        ));
+        $foundPost = $post->fetch();
+
+        return $foundPost;
+    }
+
+    public function getPostsFromUser($userId)
+    {
+        $db = $this->dbConnect();
+        $posts = $db->prepare('SELECT * FROM posts WHERE user_id = :userId');
+        $posts->execute(array(
+            'userId' => $userId
+        ));
+
+        return $posts;
+    }
+
+    public function deletePost($postId)
+    {
+        $db = $this->dbConnect();
+        $post = $db->prepare('DELETE FROM posts WHERE id = :postId');
+        $deletedPost = $post->execute(['postId' => $postId]);
+
+        return $deletedPost;
+    }
+
+    public function deletePostsFromUser($userId)
+    {
+        $db = $this->dbConnect();
+        $posts = $db->prepare('DELETE FROM posts WHERE user_id = :userId');
+        $deletedPosts = $posts->execute(['userId' => $userId]);
+
+        return $deletedPosts;
     }
 }

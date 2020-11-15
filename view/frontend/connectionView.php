@@ -14,7 +14,7 @@
 
 				<div class="form-group">
 					<label for="pass">Mot de passe</label>
-					<input type="password" class="form-control" name="pass" id="pass" aria-describedby="pass_format" required />
+					<input type="password" class="form-control" name="pass" id="pass" required />
 				</div>
 
 				<button class="btn btn-primary" type="submit">Valider</button>

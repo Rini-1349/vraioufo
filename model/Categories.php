@@ -21,4 +21,14 @@ class Categories extends Manager
         
         return $category->fetch();
     }
+
+    public function addCategory()
+    {
+        // Ajoute une catégorie
+    }
+
+    public function deleteCategory($categoryId)
+    {
+        // Supprime une catégorie
+    }
 }

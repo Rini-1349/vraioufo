@@ -2,6 +2,7 @@
 session_start();
 
 require('controller/frontend.php');
+require('controller/backend.php');
 
 try 
 {
@@ -30,15 +31,18 @@ try
 
                 if (!preg_match("#^[a-z0-9_.-]+@[a-z0-9_.-]{2,}\.[a-z]{2,4}$#", $_POST['email']))
                 {
-                    subscriptionForm('Format d\'adresse email non valide');
+                    $message[0] = 'Format d\'adresse email non valide';
+                    subscriptionForm($message);
                 }
                 elseif (!preg_match("#^\S*(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[0-9])(?=\S*[\W])\S{8,20}$#", $_POST['pass']))
                 {
-                    subscriptionForm('Le mot de passe doit contenir entre 8 et 20 caractères dont 1 chiffre, 1 minuscule, 1 majuscule et 1 caractère spécial');
+                    $message[0] = 'Le mot de passe doit contenir entre 8 et 20 caractères dont 1 chiffre, 1 minuscule, 1 majuscule et 1 caractère spécial';
+                    subscriptionForm($message);
                 }
                 elseif ($_POST['pass'] != $_POST['pass_confirm'])
                 {
-                    subscriptionForm('Confirmation de mot de passe incorrecte');
+                    $message[0] = 'Confirmation de mot de passe incorrecte';
+                    subscriptionForm($message);
                 }
                 else
                 {
@@ -85,8 +89,8 @@ try
                 }  
                 else
                 {
-                    $error = 'Merci de remplir les champs demandés';
-                    postForm($error);
+                    $message[0] = 'Merci de remplir les champs demandés';
+                    postForm($message);
                 }
             }
             else
@@ -120,7 +124,8 @@ try
             }
             else
             {
-                echo 'Erreur'; die;
+                $message[0] = 'Votre vote n\'a pas pu être enregistré';
+                homepage($message);
             }
             
         }
@@ -133,6 +138,38 @@ try
             else
             {
                 homepage();
+            }
+        }
+        elseif ($action == 'admin')
+        {
+            if (isset($_SESSION['role']) AND $_SESSION['role'] == 1)
+            {
+                if (isset($_GET['operation']) AND !empty($_GET['operation']))
+                {
+                    $operation = $_GET['operation'];
+
+                    if ($operation == 'deleteUser' AND isset($_GET['userId']) AND (int)$_GET['userId'] != 0)
+                    {
+                        deleteUser($_GET['userId']);
+                    }
+                    elseif ($operation == 'deletePost' AND isset($_GET['postId']) AND (int)$_GET['postId'] != 0)
+                    {
+                        deletePost($_GET['postId']);
+                    }
+                    else
+                    {
+                        homepageAdmin();
+                    }
+                }
+                else
+                {
+                    homepageAdmin();
+                }               
+            }
+            else
+            {
+                $message[0] = 'Accès refusé';
+                homepage($message);
             }
         }
         else

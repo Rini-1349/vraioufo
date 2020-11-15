@@ -16,8 +16,6 @@ class Users extends Manager
         $user = $db->prepare('SELECT * FROM users WHERE pseudo=? OR email=?');
         $user->execute(array($pseudo, $eMail));
         $foundLines = $user->rowCount();
-        //var_dump("boolean foundLines : ", $foundLines);
-        //die;
 
         return (bool)$foundLines;
     }
@@ -37,16 +35,45 @@ class Users extends Manager
         return $newUser;
     }
 
-    public function getPlayer($login)
+    public function getUser($login)
     {
         $db = $this->dbConnect();
-        $player = $db->prepare('SELECT * FROM users WHERE pseudo= :pseudo OR email= :email');
-        $player->execute(array(
+        $user = $db->prepare('SELECT * FROM users WHERE pseudo= :pseudo OR email= :email');
+        $user->execute(array(
             'pseudo' => $login,
             'email' => $login
         ));
-        $foundPlayer = $player->fetch();
+        $foundUser = $user->fetch();
 
-        return $foundPlayer;
+        return $foundUser;
+    }
+
+    public function getUserById($userId)
+    {
+        $db = $this->dbConnect();
+        $user = $db->prepare('SELECT * FROM users WHERE id = :userId');
+        $user->execute(array(
+            'userId' => $userId
+        ));
+        $foundUser = $user->fetch();
+
+        return $foundUser;
+    }
+
+    public function listUsers()
+    {
+        $db = $this->dbConnect();
+        $users = $db->query('SELECT * FROM users');
+        
+        return $users;
+    }
+
+    public function deleteUser($userId)
+    {
+        $db = $this->dbConnect();
+        $user = $db->prepare('DELETE FROM users WHERE id = :userId');
+        $deletedUser = $user->execute(['userId' => $userId]);
+
+        return $deletedUser;
     }
 }

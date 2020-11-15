@@ -56,7 +56,7 @@
                         </tr>
 
 
-                        <?php foreach ($listPosts as $post):
+                        <?php foreach ($posts as $post):
 
                             $tdClass = null;
 

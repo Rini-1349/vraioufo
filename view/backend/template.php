@@ -25,33 +25,15 @@
                         <small id="bobard">Bobard Land</small> 
                     </a>
                     <ul class="nav justify-content-end">
-                            <?php if ($_SESSION)
-                            {
-                                if ($_SESSION['role'])
-                                {
-                            ?>
-                                <li class="nav-item"><a class="nav-link" href="index.php?action=admin">Administration</a></li>
-                            <?php
-                                }
-                            ?>
-                                <li class="nav-item"><a class="nav-link" href="index.php?action=logout"><i class="fas fa-user-circle"></i> Se déconnecter</a></li>
-                            <?php                       
-                            }
-                            else
-                            {
-                            ?>
-                                <li class="nav-item"><a class="nav-link" href="index.php?action=connection">Se connecter</a></li>
-                                <li class="nav-item"><a class="nav-link" href="index.php?action=subscription">S'inscrire</a></li>
-                            <?php
-                            }
-                            ?>
-                        </ul>
+                        <li class="nav-item"><a class="nav-link" href="index.php?action=homepage">Retour au site</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.php?action=logout"><i class="fas fa-user-circle"></i> Se déconnecter</a></li>
+                    </ul>
                 </nav>
             </header>
         </div>
         <div class="container">
             <div class="row">
-            <div class="col-12">
+                <div class="col-12">
                     <?php if (isset($message[0]))
                     {
                     ?>
