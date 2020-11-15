@@ -21,7 +21,7 @@
             <header>
                 <nav class="navbar navbar-light justify-content-between">
                     <a class="navbar-brand" href="index.php?action=homepage">
-                        <h1 class="site-title">VRAI OUFO</h1>
+                        <h1 class="site-title">&iquest;VR&Eacute; &Ugrave; F&Ocirc;?</h1>
                         <small id="bobard">Bobard Land</small> 
                     </a>
                     <ul class="nav justify-content-end">

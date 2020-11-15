@@ -1,29 +1,32 @@
 @font-face {
-    font-family: 'adam_cg_pro';
-    src: url("../fonts/ADAMCGPRO.eot"); /* IE9 Compat Modes */
-    src: url("../fonts/ADAMCGPRO.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-      url("../fonts/ADAMCGPRO.otf") format("opentype"), /* Open Type Font */
-      url("../fonts/ADAMCGPRO.svg") format("svg"), /* Legacy iOS */
-      url("../fonts/ADAMCGPRO.ttf") format("truetype"), /* Safari, Android, iOS */
-      url("../fonts/ADAMCGPRO.woff") format("woff"), /* Modern Browsers */
-      url("../fonts/ADAMCGPRO.woff2") format("woff2"); /* Modern Browsers */
+    font-family: 'knockout29';
+    src: url("../fonts/knockout29/Knockout-HTF29-JuniorLiteweight.eot"); /* IE9 Compat Modes */
+    src: url("../fonts/knockout29/Knockout-HTF29-JuniorLiteweight.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+      url("../fonts/knockout29/Knockout-HTF29-JuniorLiteweight.otf") format("opentype"), /* Open Type Font */
+      url("../fonts/knockout29/Knockout-HTF29-JuniorLiteweight.svg") format("svg"), /* Legacy iOS */
+      url("../fonts/knockout29/Knockout-HTF29-JuniorLiteweight.ttf") format("truetype"), /* Safari, Android, iOS */
+      url("../fonts/knockout29/Knockout-HTF29-JuniorLiteweight.woff") format("woff"), /* Modern Browsers */
+      url("../fonts/knockout29/Knockout-HTF29-JuniorLiteweight.woff2") format("woff2"); /* Modern Browsers */
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
-    font-family: 'the_truth_of_a_thousand_lies/';
-    src: url("../fonts/the_truth_of_a_thousand_lies/TheTruthofaThousandLies.eot"); /* IE9 Compat Modes */
-    src: /*url("../fonts/the_truth_of_a_thousand_lies//ADAMCGPRO.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-      /*url("../fonts/the_truth_of_a_thousand_lies//ADAMCGPRO.otf") format("opentype"), /* Open Type Font */
-      url("../fonts/the_truth_of_a_thousand_lies/TheTruthofaThousandLies.svg") format("svg"), /* Legacy iOS */
-      url("../fonts/the_truth_of_a_thousand_lies/TheTruthofaThousandLies.ttf") format("truetype"), /* Safari, Android, iOS */
-      url("../fonts/the_truth_of_a_thousand_lies/TheTruthofaThousandLies.woff") format("woff"), /* Modern Browsers */
-      url("../fonts/the_truth_of_a_thousand_lies/TheTruthofaThousandLies.woff2") format("woff2"); /* Modern Browsers */
+    font-family: 'knockout31';
+    src: url("../fonts/knockout31/Knockout-HTF31-JuniorMiddlewt.eot"); /* IE9 Compat Modes */
+    src: url("../fonts/knockout31/Knockout-HTF31-JuniorMiddlewt.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+      url("../fonts/knockout31/Knockout-HTF31-JuniorMiddlewt.otf") format("opentype"), /* Open Type Font */
+      url("../fonts/knockout31/Knockout-HTF31-JuniorMiddlewt.svg") format("svg"), /* Legacy iOS */
+      url("../fonts/knockout31/Knockout-HTF31-JuniorMiddlewt.ttf") format("truetype"), /* Safari, Android, iOS */
+      url("../fonts/knockout31/Knockout-HTF31-JuniorMiddlewt.woff") format("woff"), /* Modern Browsers */
+      url("../fonts/knockout31/Knockout-HTF31-JuniorMiddlewt.woff2") format("woff2"); /* Modern Browsers */
     font-weight: normal;
     font-style: normal;
 }
 
 
+body {
+    font-family: 'knockout29', 'Trebuchet MS', 'Lucida Sans Serif';
+}
 
 /* Header */
 header{
@@ -32,7 +35,7 @@ header{
 }
 
 .site-title {
-    font-family: 'the_truth_of_a_thousand_lies/';
+    font-family: 'knockout31', 'Trebuchet MS', 'Lucida Sans Serif';
     font-size: 2.3em;
     color: /*#008f83;*/#f89c2a;
 }
