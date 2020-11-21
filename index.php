@@ -203,7 +203,7 @@ try
     }
     else 
     {
-        listPosts(1);
+        listPosts(1, $message);
     }
 }
 catch(Exception $e)
