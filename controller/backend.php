@@ -5,10 +5,12 @@ require_once('model/Categories.php');
 require_once('model/Votes.php');
 
 
-function homepageAdmin(array $message = null)
+function homepageAdmin($currentPage, array $message = null)
 {
+    $firstPost = ($currentPage * 14) - 14;
+
     $posts = new Posts();
-    $posts = $posts->listPosts();
+    $posts = $posts->listPosts($firstPost);
 
     $categories = new Categories();
     $categories = $categories->listCategories();

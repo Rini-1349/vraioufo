@@ -8,7 +8,18 @@ try
 {
     if (isset ($_GET['action']) AND !empty($_GET['action']))
     {
-        $action = htmlspecialchars($_GET['action']);
+        $action = $_GET['action'];
+
+        if(isset($_GET['page']) && !empty($_GET['page']) AND (int)$_GET['page'] > 0)
+        {
+            $currentPage = (int)$_GET['page'];
+        }
+        else
+        {
+            $currentPage = 1;
+        }
+        
+        $message = [];
 
         if ($action == 'connection')
         {
@@ -67,7 +78,9 @@ try
         {
             session_unset();
             session_destroy();
-            homepage();
+
+            $message[1] = 'Vous êtes déconnecté(e)';
+            listPosts($currentPage, $message);
         }
         elseif ($action == 'addPost')
         {
@@ -120,31 +133,23 @@ try
                     'postId' => $_GET['postId'],
                     'value' => $_POST['vote']
                 ];
-                submitVote($vote);
+                submitVote($vote, $currentPage);
             }
             else
             {
-                if (isset($_GET['ah']) AND $_GET['ah'] == 'deja')
-                {
-                    deja();
-                }
-                else
-                {
-                    $message[0] = 'Votre vote n\'a pas pu être enregistré';
-                    homepage($message);
-                }
-            }
-            
+                $message[0] = 'Votre vote n\'a pas pu être enregistré';
+                listPosts($currentPage, $message);
+            }         
         }
         elseif ($action == 'category')
         {
             if (isset($_GET['categoryId']) AND ((int)$_GET['categoryId'] !== 0))
             {
-                listPostsByCategory($_GET['categoryId']);
+                listPosts($currentPage, $message, $_GET['categoryId']);
             }
             else
             {
-                homepage();
+                listPosts($currentPage, $message);
             }
         }
         elseif ($action == 'admin')
@@ -164,7 +169,7 @@ try
                         else
                         {
                             $message[0] = 'Vous ne pouvez pas supprimer votre propre compte';
-                            homepageAdmin($message);
+                            homepageAdmin($currentPage, $message);
                         }              
                     }
                     elseif ($operation == 'deletePost' AND isset($_GET['postId']) AND (int)$_GET['postId'] != 0)
@@ -173,28 +178,32 @@ try
                     }
                     else
                     {
-                        homepageAdmin();
+                        homepageAdmin($currentPage, $message);
                     }
                 }
                 else
                 {
-                    homepageAdmin();
+                    homepageAdmin($currentPage, $message);
                 }               
             }
             else
             {
                 $message[0] = 'Accès refusé';
-                homepage($message);
+                listPosts($currentPage, $message);
             }
         }
         else
         {
-            homepage();
+            if ($action !== 'homepage')
+            {
+                $message[0] = 'Cette page n\'existe pas';
+            }
+            listPosts($currentPage, $message);
         }      
     }
     else 
     {
-        homepage();
+        listPosts(1);
     }
 }
 catch(Exception $e)

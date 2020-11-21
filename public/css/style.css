@@ -23,116 +23,161 @@
     font-style: normal;
 }
 
-
-body {
-    font-family: 'knockout29', 'Trebuchet MS', 'Lucida Sans Serif';
-}
-
-/* Header */
-header{
-    border-bottom: 2px solid #8f4a00;
-    padding-top: 1%;
-}
-
-.site-title {
-    font-family: 'knockout31', 'Trebuchet MS', 'Lucida Sans Serif';
-    font-size: 2.3em;
-    color: /*#008f83;*/#f89c2a;
-}
-
-#bobard{
-    /*color: #768f00;*/
-    font-size: 1em;
-}
-
-
-
-.fa-angle-double-up {
-    color: black;
-}
-
 /* Tout */
-.content {
-    margin: 4% 0%;
-
+body {
+    font-family: 'knockout31', 'Trebuchet MS', 'Lucida Sans Serif';
+    /*overflow-x: hidden;*/
 }
-
-
 
 a, a:hover, a:visited{
     text-decoration: none;
     color: #b02907;
-    /*color: #00328f;*/
 }
 
 
-/* Bouton-lien */
-/*.button {
-    background-color: #f89c2a;
-    border-radius: 5px;
-    color: white;
-    padding: 10px 14px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin: 4px 2px;
-    cursor: pointer;
-}*/
 
-/* Tableaux */
-
-
-thead {
-    background-color: #d1d1d1;
+/* Header */
+.menu {
+    background-color: #909090;
 }
 
-
-/* Tableau derniers articles */
-.last_posts th:nth-child(1), .last_posts td:nth-child(1) {
-    width: 40%;
+.site-title {
+    font-size: 2.3em;
+    color: /*#008f83;*/#f89c2a;
+    text-shadow: 3px 4px 1px grey;
+}
+.site-subtitle {
+    font-size: 1.1em;
+    color: /*#008f83;*/#f89c2a;
+    text-shadow: 3px 3px 1px grey;
 }
 
-.last_posts th:nth-child(2), .last_posts td:nth-child(2) {
-    width: 10%;
-}
-
-.last_posts th:nth-child(3), .last_posts td:nth-child(3) {
-    width: 20%;
-}
-
-.last_posts th:nth-child(4), .last_posts td:nth-child(4) {
-    width: 30%;
-}
-
-
-/* Tableau des catégories */
-.categories_list th:nth-child(1), .categories td:nth-child(1) {
-    width: 30%;
-}
-
-.categories_list th:nth-child(2), .categories td:nth-child(2) {
-    width: 80%;
-}
-
-
-/* Tableau des articles par catégorie */
-.posts_category th:nth-child(1), .posts_category td:nth-child(1) {
-    width: 50%;
-}
-
-.posts_category th:nth-child(2), .posts_category td:nth-child(2) {
-    width: 20%;
-}
-
-.posts_category th:nth-child(3), .posts_category td:nth-child(3) {
-    width: 30%;
-}
-
-
-.category {
+.connect-subscr {
+    list-style-type: none;
     font-size: 1.5em;
 }
 
-.title {
-    font-size: 1.2em;
+.connect-subscr li {
+    margin: -0.5em;
+}
+
+.connect-subscr a {
+    color: #626262;
+}
+
+/* Footer */
+footer {
+    background-color: #909090;
+    padding-top: 1em;
+}
+
+
+/* Page articles */
+@media screen and (max-width: 768px) and (min-width: 576px) {
+    .content {
+        padding: 0% 10%;
+    }
+}
+@media screen and (min-width: 992px) {
+    .content {
+        padding: 0% 8%;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .content {
+        padding: 0% 15%;
+    }
+}
+
+
+/* Liste des catégpries */
+.category {
+    margin: 2em 2em;
+    border: 1px solid #bbbbbb;
+    border-radius: 20px;
+}
+
+.category:hover {
+    background-color: #e6e3e3;
+}
+
+.category div {
+    font-size: 1.5em;
+}
+
+.category a {
+    color: #a26822;
+}
+
+@media screen and (max-width: 840px) {
+    .category {
+        margin: 1em 0.5em;
+    }
+}
+
+
+/* Les articles */
+article {
+    border: 1px solid #bbbbbb;
+    border-radius: 15px;
+    background-color: #f2f2f2;
+    padding: 1em;
+    margin: 2em 1em;
+}
+
+h3 {
+    color: #3b3b3b;
+    font-size: 2.3em;
+}
+
+.infos_article {
+    color: #9e9e9e;
+    margin-top: -1em;
+}
+
+.article_content {
+    color: #272727;
+    font-size: 1.8em;
+}
+
+
+/* Boutons vote */
+.possible_votes, .responses {
+    padding: 0px;
+}
+.possible_votes .btn, .responses .btn {
+    border: 1px solid #bbbbbb;
+    border-radius: 15px;
+    background-color: #ffffff;
+    font-size: 1.1em;
+    color: #626262;
+}
+
+.responses .btn:hover {
+    cursor: default;
+}
+
+.possible_votes .btn:hover {
+    background-color: #e6e3e3;
+}
+
+
+
+/* Couleurs icônes */
+.true {
+    color: #64bd3b;
+}
+
+.false {
+    color: #e83337;
+}
+
+.sosoon {
+    color: #f7cd46;
+}
+
+
+/* Les contenus possibles en réponse à "Déjà ?" */
+.hidden {
+    display: none;
 }

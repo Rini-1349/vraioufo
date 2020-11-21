@@ -16,76 +16,97 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
         
     </head>
-    <body>
-        <div class="container">
-            <header>
-                <nav class="navbar navbar-light justify-content-between">
-                    <a class="navbar-brand" href="index.php?action=homepage">
-                        <h1 class="site-title">&iquest;VR&Eacute; &Ugrave; F&Ocirc;?</h1>
-                        <small id="bobard">Bobard Land</small> 
-                    </a>
-                    <ul class="nav justify-content-end">
-                            <?php if ($_SESSION)
+    <body id="top">
+        
+        <header class="menu">
+            <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+                <a class="navbar-brand mr-auto" href="index.php?action=homepage">
+                    <h1 class="site-title">&iquest;VR&Eacute; &Ugrave; F&Ocirc;?</h1>
+                    <small class="site-subtitle">La vie n'aura plus aucun secret pour vous ! Votez !</small> 
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <?php if ($_SESSION)
                             {
-                                if ($_SESSION['role'])
-                                {
                             ?>
-                                <li class="nav-item"><a class="nav-link" href="index.php?action=admin">Administration</a></li>
-                            <?php
-                                }
-                            ?>
-                                <li class="nav-item"><a class="nav-link" href="index.php?action=logout"><i class="fas fa-user-circle"></i> Se déconnecter</a></li>
+                                <li class="nav-item">
+                                    <ul class="connect-subscr">
+                                        <li>
+                                            <a class="nav-link" href="index.php?action=logout">SE D&Eacute;CONNECTER</a>
+                                        </li>
+                                        <?php if ($_SESSION['role'])
+                                            {
+                                        ?>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="index.php?action=admin">ADMINISTRATION</a>
+                                            </li>
+                                        <?php
+                                            } ?>
+                                    </ul>                                
+                                </li>
+                                <li class="nav-item">
+                                    
+                                </li>
                             <?php                       
                             }
                             else
                             {
                             ?>
-                                <li class="nav-item"><a class="nav-link" href="index.php?action=connection">Se connecter</a></li>
-                                <li class="nav-item"><a class="nav-link" href="index.php?action=subscription">S'inscrire</a></li>
+                                <li class="nav-item">
+                                    <ul class="connect-subscr">
+                                        <li>
+                                            <a class="nav-link" href="index.php?action=connection">SE CONNECTER</a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link" href="index.php?action=subscription">S'INSCRIRE</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/www.solangebaron.com">PARTIR... VITE !</a>
+                                        </li>
+                                    </ul>                                
+                                </li>
                             <?php
                             }
-                            ?>
-                        </ul>
-                </nav>
-            </header>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="row">
-                    <?php if (isset($message[0]))
-                    {
-                    ?>
-                        <div class="col-12">
-                            <div class="text-danger"><?= $message[0] ?></div>
-                        </div>
-                    <?php
-                    }
-                    if (isset($message[1]))
-                    {
-                    ?>
-                        <div class="col-12">
-                            <div class="text-success"><?= $message[1] ?></div>
-                        </div>
-                    <?php
-                    }
-                    if (isset($message[2]))
-                    {
-                    ?>
-                        <div class="col-12">
-                            <div class="text-warning"><?= $message[2] ?></div>
-                        </div>
-                    <?php
-                    }
-                    ?>
+                        ?>
+                        
+                        
+                    </ul>
                 </div>
-            </div>
-            <?= $content ?>
-        </div>
+            </nav>                   
+        </header>
+        <?php if (isset($message[0]))
+                {
+                ?>
+                    <div class="alert-danger text-center"><?= $message[0] ?></div>
+
+                <?php
+                }
+                if (isset($message[1]))
+                {
+                ?>
+                    <div class="alert-success text-center"><?= $message[1] ?></div>
+                <?php
+                }
+        ?>
+
+        <div class="container-fluid">
+            <?= $content ?>   
+        </div>    
         <footer>
-            <div class="col-2 offset-10">
-            <a href=""><i class="fas fa-angle-double-up fa-2x"></i></a>
-            </div>
-            
-        </footer>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-11">
+                        <p class="text-center">Copyright 2020 &copy;BaronDeCarrese</p>
+                    </div>
+                    <div class="col-1">
+                        <a href="#top" title="Haut de page"><i class="fas fa-angle-double-up fa-2x"></i></a>
+                    </div>    
+                </div>              
+            </div>        
+        </footer>     
     </body>
 </html>

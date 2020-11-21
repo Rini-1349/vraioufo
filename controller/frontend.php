@@ -6,14 +6,82 @@ require_once('model/Votes.php');
 require_once('model/Deja.php');
 
 
-function homepage($message = null)
+function listPosts($currentPage, $message, $categoryId = null)
 {
     $post = new Posts();
-    $posts = $post->listPosts();
-    $foundPosts = $post->listPosts();
+
+    $numberOfPosts = $post->countPosts();
+    $numberOfPages = ceil($numberOfPosts / 16);
+    $firstPost = ($currentPage * 16) - 16;
 
     $categories = new Categories();
-    $categories = $categories->listCategories();
+
+    if ($categoryId)
+    {
+        $posts = $post->listPosts($firstPost, $categoryId);
+        $foundPosts = $post->listPosts($firstPost, $categoryId);
+        $category = $categories->getCategory($categoryId);
+    }
+    else
+    {
+        $posts = $post->listPosts($firstPost);
+        $foundPosts = $post->listPosts($firstPost);
+        $categories = $categories->listCategories();
+    }
+    
+    $responses = [];
+
+    foreach ($foundPosts as $post)
+    {
+        $votes = new Votes();
+        $votes = $votes->getVotesByPost($post['id']);
+
+        $trueResponses = 0;
+        $falseResponses = 0;
+
+        foreach ($votes as $vote)
+        {
+            if ($vote['value'] == $post['true_value'])
+            {
+                $trueResponses++;
+            }
+            else
+            {
+                $falseResponses++;
+            }
+        }
+
+        $responses[$post['id']] = [$falseResponses, $trueResponses];
+    }
+
+    $deja = new Deja();
+    $dejaContent = $deja->getDejaContent();
+    $dejaElements = '';
+
+    foreach ($dejaContent as $dejaElement)
+    {
+        $dejaElements .= $dejaElement['content'] . ';';
+    }
+
+        require('view/frontend/listPostsView.php');
+
+
+    
+}
+
+function listPostsByCategory($categoryId, $currentPage)
+{
+    $post = new Posts();
+
+    $numberOfPostsByCategory = $post->countPosts($categoryId);
+    $numberOfPages = ceil($numberOfPostsByCategory / 14);
+    $firstPost = ($currentPage * 14) - 14;
+
+    $postsByCategory = $post->listPosts($firstPost, $categoryId);
+    $foundPosts = $post->listPosts($firstPost, $categoryId);
+
+    $categories = new Categories();
+    $category = $categories->getCategory($categoryId);
 
     $responses = [];
 
@@ -40,8 +108,18 @@ function homepage($message = null)
         $responses[$post['id']] = [$falseResponses, $trueResponses];
     }
 
-    require('view/frontend/homepageView.php');
+    $deja = new Deja();
+    $dejaContent = $deja->getDejaContent();
+    $dejaElements = '';
+
+    foreach ($dejaContent as $dejaElement)
+    {
+        $dejaElements .= $dejaElement['content'] . ';';
+    }
+
+    require('view/frontend/categoryView.php');
 }
+
 
 
 function connectionForm($message = null)
@@ -145,56 +223,27 @@ function createPost(array $newPost)
     header('Location: index.php?action=homepage');
 }
 
-function submitVote(array $vote)
+function submitVote(array $vote, $currentPage)
 {
     $posts = new Posts();
-    $postIsMine = $posts->isMine($vote);
+    $postIsMine = $posts->postIsMine($vote);
 
     if (!$postIsMine)
     {
         $votes = new Votes();
         if ($newVote = $votes->addVote($vote))
         {
-            homepage();
+            header('Location: index.php?action=homepage&page=' . $currentPage);
         }
         else
         {
-            echo 'Non';
+            header('Location: index.php?action=homepage&page=' . $currentPage);
         }
     }
     else
     {
         $message[0] = 'Impossible de voter sur mon article';
-        connectionForm($message);
+        header('Location: index.php?action=homepage&page=' . $currentPage);
     }
 }
 
-function listPostsByCategory($categoryId)
-{
-    $posts = new Posts();
-    $postsByCategory = $posts->listPosts($categoryId);
- 
-    $categories = new Categories();
-    $category = $categories->getCategory($categoryId);
-
-    require('view/frontend/categoryView.php');
-}
-
-function deja()
-{
-    $deja = new Deja();
-
-    $dejaCount = $deja->dejaCount();
-
-    $randomInt = random_int(1, $dejaCount);
-    
-    if ($deja = $deja->getDejaContent($randomInt))
-    {
-        $message[2] = $deja['content'];
-        homepage($message);
-    }
-    else
-    {
-        homepage();
-    }
-}

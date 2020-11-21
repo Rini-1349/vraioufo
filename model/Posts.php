@@ -4,18 +4,39 @@ require_once('Manager.php');
 
 class Posts extends Manager
 {
-
-    public function listPosts($category = null)
+    // Compte des posts pour pagination
+    public function countPosts($category = null)
     {
-        $userId = 0;
+        if ($category)
+        {
+            $whereCategory = 'WHERE posts.category_id = ' . $category . ' ';
+        }
+        else
+        {
+            $whereCategory = '';
+        }
+
+        $db = $this->dbConnect();
+        $posts = $db->query('SELECT * FROM posts ' . $whereCategory);
+
+        return $posts->rowCount();
+    }
+
+    // Récupération des posts
+    public function listPosts($firstPost, $categoryId = null)
+    {     
         if (isset($_SESSION['id']))
         {
             $userId = $_SESSION['id'];
         } 
-        
-        if ($category)
+        else
         {
-            $whereCategory = 'WHERE posts.category_id = ' . $category . ' ';
+            $userId = 0;
+        }
+        
+        if ($categoryId)
+        {
+            $whereCategory = 'WHERE posts.category_id = ' . $categoryId . ' ';
         }
         else
         {
@@ -38,13 +59,14 @@ class Posts extends Manager
                             LEFT JOIN users ON users.id = posts.user_id
                             LEFT JOIN votes ON (votes.post_id = posts.id AND votes.user_id = ' . $userId . ') ' .
                             $whereCategory .
-                            'ORDER BY created DESC');
+                            'ORDER BY created DESC
+                            LIMIT ' . $firstPost . ', 16');
                                                         
         return $posts;
     }
 
-
-    public function isMine(array $vote)
+    // Le post est-il celui de l'utilisateur courant ?
+    public function postIsMine(array $vote)
     {
         $db = $this->dbConnect();
         $post = $db->prepare('SELECT * FROM posts WHERE (id = :postId AND user_id = :userId)');
@@ -58,7 +80,7 @@ class Posts extends Manager
         return (bool)$postIsMine;
     }
 
-
+    // Ajouter un post
     public function addPost($newPost)
     {
         $db = $this->dbConnect();
@@ -73,6 +95,11 @@ class Posts extends Manager
         
         return $post;
     }
+
+    
+
+
+    // Back Office
 
     public function getPostById($postId)
     {

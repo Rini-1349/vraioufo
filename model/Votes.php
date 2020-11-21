@@ -4,6 +4,7 @@ require_once('Manager.php');
 
 class Votes extends Manager
 {
+    // Récupérer les votes effectués sur un post
     public function getVotesByPost($postId)
     {
         $db = $this->dbConnect();
@@ -15,6 +16,7 @@ class Votes extends Manager
         return $votes;
     }
 
+    // Ajouter un vote
     public function addVote(array $vote)
     {
         $db = $this->dbConnect();
@@ -28,6 +30,11 @@ class Votes extends Manager
 
         return $newVote;
     }
+
+
+
+    
+    // Back Office
 
     public function deleteVotesOfPost($postId)
     {

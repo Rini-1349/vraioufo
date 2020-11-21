@@ -4,12 +4,7 @@ require_once('Manager.php');
 
 class Users extends Manager
 {
-    private $_name;
-    private $_fisrtName;
-    private $_pseudo;
-    private $_email;
-    private $_password;
-
+    // L'email ou le pseudo est-il déjà utilisés ?
     public function loginAlreadyTaken($pseudo, $eMail)
     {
         $db = $this->dbConnect();
@@ -20,6 +15,7 @@ class Users extends Manager
         return (bool)$foundLines;
     }
 
+    // Ajouter un utilisateur
     public function addUser(array $user)
     {
         $db = $this->dbConnect();
@@ -60,6 +56,10 @@ class Users extends Manager
         return $foundUser;
     }
 
+
+
+    // Back Office
+    
     public function listUsers()
     {
         $db = $this->dbConnect();

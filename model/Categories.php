@@ -4,7 +4,6 @@ require_once('Manager.php');
 
 class Categories extends Manager
 {
-
     public function listCategories()
     {
         $db = $this->dbConnect();
@@ -20,15 +19,5 @@ class Categories extends Manager
                                 WHERE id = ' . $categoryId);
         
         return $category->fetch();
-    }
-
-    public function addCategory()
-    {
-        // Ajoute une catégorie
-    }
-
-    public function deleteCategory($categoryId)
-    {
-        // Supprime une catégorie
     }
 }
