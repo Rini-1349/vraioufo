@@ -56,14 +56,14 @@
                             <div class="col-12 infos_article">
                                 <p>Par <?= htmlspecialchars($post['pseudo']) ?> &bull;
                                     <a href="index.php?action=category&categoryId=<?= $post['category_id'] ?>">
-                                        <?= htmlspecialchars($post['category_title']) ?>
+                                        <?= $post['category_title'] ?>
                                     </a>&bull;
                                     <?= date('d/m/Y à H:i', strtotime($post['created'])) ?>
                                 </p>
                             </div>
                             <div class="col-12 article_content">
                                 <?php if ($post['category_title'] == 'Le monde à l\'envers' AND (!isset($_SESSION['id']) OR ($post['user_id'] != $_SESSION['id'] AND $post['vote'] == null))):?>
-                                    <p><small>Tu découvriras l'article après avoir voté</small></p>
+                                    <p><small><em>Tu découvriras l'article après avoir voté</em></small></p>
                                 <?php else: ?>
                                     <p><?= htmlspecialchars($post['content']) ?></p>
                                 <?php endif ?>
