@@ -85,7 +85,7 @@
                                         if ($post['user_id'] == $_SESSION['id'] OR $post['vote'] != null):
 
                                             if ($post['user_id'] == $_SESSION['id']):                                                                            
-                                                if ($post['true_value' == 0])
+                                                if ($post['true_value'] == 0)
                                                 {
                                                     $response = '<span class="false">
                                                                     <i class="fas fa-times"></i>

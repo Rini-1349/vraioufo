@@ -66,14 +66,11 @@
         <footer>
             <div class="col-12">
                 <div class="row">
-                    <div class="col-11">
+                    <div class="col-12">
                         <p class="text-center">Copyright 2020 &copy;BaronDeCarrese</p>
                     </div>
-                    <div class="col-1">
-                        <a href="#top" title="Haut de page"><i class="fas fa-angle-double-up fa-2x"></i></a>
-                    </div>    
                 </div>              
             </div>        
-        </footer>     
+        </footer>  
     </body>
 </html>
