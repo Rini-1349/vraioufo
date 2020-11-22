@@ -148,7 +148,7 @@ function addUser(array $user)
     else
     {
         $message[0] = 'Pseudo ou adresse mail déjà utilisé(e)';
-        connectionForm($message);
+        require('view/frontend/subscriptionView.php');
     }
 }
 

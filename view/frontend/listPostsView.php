@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 
 
-<div class="container-fluid content">
+<div class="container-fluid content form_page">
     <?php if ($_SESSION)
     {
     ?>
@@ -27,7 +27,7 @@
             <?php foreach ($categories as $category): ?>
                 <div class="col-9 col-md-3 col-sm-5 text-center category">     
                     <a href="index.php?action=category&categoryId=<?= $category['id'] ?>">
-                        <div><?= $category['img'] ?><?= $category['title'] ?></div>         
+                        <div class="text-uppercase"><?= $category['img'] ?><?= $category['title'] ?></div>         
                     </a>                            
                 </div>
             <?php endforeach ?>  
@@ -40,7 +40,7 @@
                     <article class="last_posts text-center">
                         <div class="row">
                             <div class= "col-12 mx-auto">
-                                <h3><?= htmlspecialchars(strtoupper($post['title'])) ?></h3>
+                                <h3 class="text-uppercase"><?= htmlspecialchars(strtoupper($post['title'])) ?></h3>
                             </div>
                             <div class="col-12 infos_article">
                                 <p>Par <?= htmlspecialchars($post['pseudo']) ?> &bull;
@@ -102,7 +102,7 @@
                                             endif
                                         
                                         ?>
-                                        <div class="col-3 responses">
+                                        <div class="col-2 col-sm-3 responses">
                                             <div class="btn">
                                                 <span class="true">
                                                     <i class="far fa-check-circle"></i>
@@ -110,12 +110,12 @@
                                                 <?= $responses[$post['id']][1] ?>
                                             </div>
                                         </div>
-                                        <div class="col-6 responses">
+                                        <div class="col-8 col-sm-6 responses">
                                             <div class="btn">
                                                 <?= $response ?>
                                             </div>
                                         </div>
-                                        <div class="col-3 responses">
+                                        <div class="col-2 col-sm-3 responses">
                                             <div class="btn">
                                                 <span class="false">
                                                     <i class="fas fa-times"></i>
@@ -125,7 +125,7 @@
                                         </div>                     
                                             
                                         <?php else: ?>                       
-                                            <div class="col-4 possible_votes">
+                                            <div class="col-3 possible_votes">
                                                 <form action="index.php?action=vote&postId=<?=  $post['id'] ?>&page=<?= $currentPage ?>" method="post">
                                                     <button class="btn" type="submit" name="vote" value="1">
                                                         <span class="true">
@@ -135,7 +135,7 @@
                                                     </button>
                                                 </form>
                                             </div>
-                                            <div class="col-4 possible_votes">
+                                            <div class="col-6 possible_votes">
                                                 <div class="btn deja" id="deja-<?= $post['id']?>" onclick = "deja(this)">
                                                     <span class="sosoon">
                                                         <i class="far fa-clock"></i>
@@ -143,7 +143,7 @@
                                                     D&Eacute;J&Agrave; ?
                                                 </div>
                                             </div>
-                                            <div class="col-4 possible_votes">
+                                            <div class="col-3 possible_votes">
                                                 <form action="index.php?action=vote&postId=<?= $post['id'] ?>&page=<?=  $currentPage ?>" method="post">
                                                     <button class="btn" type="submit" name="vote" value="0">
                                                         <span class="false">
@@ -163,7 +163,7 @@
             <?php endforeach ?>
         </div>
         <nav>
-            <ul class="pagination">
+            <ul class="pagination justify-content-center">
                 <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
                 <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
                     <a href="index.php?action=homepage&page=<?= $currentPage - 1 ?>" class="page-link">Précédente</a>

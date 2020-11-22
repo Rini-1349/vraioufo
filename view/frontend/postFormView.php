@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-<div class="container content">
+<div class="container content form_page">
 	<div class="row">
 		<div class="col-12 col-md-8 offset-md-2">
 			<h2>Ajouter un article</h2>
@@ -39,7 +39,7 @@
 					<label for="content">Contenu de l'article</label>
 					<textarea name="content" id="content" class="form-control" cols="40" rows="5" required ></textarea>
 				</div>
-				<button class="btn btn-primary" type="submit">Valider</button>
+				<button class="btn btn-primary" type="submit">Enregistrer l'article</button>
 			</form>
 		</div>
 	</div>

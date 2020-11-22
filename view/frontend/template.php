@@ -19,7 +19,7 @@
     <body id="top">
         
         <header class="menu">
-            <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+            <nav class="navbar navbar-expand-md navbar-light fixed-top menu">
                 <a class="navbar-brand mr-auto" href="index.php?action=homepage">
                     <h1 class="site-title">&iquest;VR&Eacute; &Ugrave; F&Ocirc;?</h1>
                     <small class="site-subtitle">La vie n'aura plus aucun secret pour vous ! Votez !</small> 

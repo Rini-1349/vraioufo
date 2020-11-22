@@ -65,6 +65,28 @@ a, a:hover, a:visited{
     color: #626262;
 }
 
+@media screen and (max-width: 540px) {
+    .site-subtitle {
+        font-size: 0.9em;
+    }
+}
+@media screen and (max-width: 460px) {
+    .site-subtitle {
+        font-size: 0.7em;
+    }
+}
+
+/* Alertes */
+.alert-danger, .alert-success {
+    margin-top: 9em;
+    padding: 0.5em;
+}
+@media screen and (max-width: 380px) {
+    .alert-danger, .alert-success {
+        margin-top: 10em;
+    }
+}
+
 /* Footer */
 footer {
     background-color: #909090;
@@ -72,7 +94,17 @@ footer {
 }
 
 
-/* Page articles */
+/* Container des pages */
+.content {
+    margin-top: 10em;
+    margin-bottom: 3em;
+}
+@media screen and (max-width: 575px) {
+    .content {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
 @media screen and (max-width: 768px) and (min-width: 576px) {
     .content {
         padding: 0% 10%;
@@ -140,6 +172,13 @@ h3 {
     font-size: 1.8em;
 }
 
+@media screen and (max-width: 575px) {
+    article {
+        padding: 1em;
+        margin: 1em 0em;
+    }
+}
+
 
 /* Boutons vote */
 .possible_votes, .responses {
@@ -162,6 +201,36 @@ h3 {
 }
 
 
+/* Pagination */
+.pagination > li > a
+{
+    background-color: white;
+    color: #3b3b3b;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: #909090 !Important;
+    border: solid 1px #909090 !Important;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: #909090 !Important;
+    border: solid 1px #909090;
+}
+
 
 /* Couleurs icônes */
 .true {
@@ -180,4 +249,31 @@ h3 {
 /* Les contenus possibles en réponse à "Déjà ?" */
 .hidden {
     display: none;
+}
+
+
+/* Formulaires */
+
+input.invalid{
+    border-color: red;
+    background-color: #FDD;
+}
+
+.error {
+    width  : 100%;
+    padding: 0;
+   
+    font-size: 80%;
+    color: red;
+   /* background-color: red;*/
+    border-radius: 5px 5px 5px 5px;
+
+}
+  
+.error.active {
+    padding: 0.3em;
+}
+.btn-primary {
+    background-color: pink;
+    border: solid 1px red;
 }

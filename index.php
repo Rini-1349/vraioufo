@@ -39,7 +39,6 @@ try
             if (isset ($_POST['name']) AND isset ($_POST['first_name']) AND isset ($_POST['pseudo']) AND isset ($_POST['email']) AND isset ($_POST['pass']) and isset ($_POST['pass_confirm'])
                     AND !empty($_POST['name']) AND !empty($_POST['first_name']) AND !empty($_POST['pseudo']) AND !empty($_POST['email']) AND !empty($_POST['pass']) and !empty($_POST['pass_confirm']))
             {
-
                 if (!preg_match("#^[a-z0-9_.-]+@[a-z0-9_.-]{2,}\.[a-z]{2,4}$#", $_POST['email']))
                 {
                     $message[0] = 'Format d\'adresse email non valide';

@@ -1,7 +1,7 @@
 <?php $title='Connexion'; ?>
 
 <?php ob_start(); ?>
-<div class="container content">
+<div class="container content form_page">
 	<div class="row">
 		<div class="col-12 col-md-8 offset-md-2">
 			<h2>Se connecter</h2>
