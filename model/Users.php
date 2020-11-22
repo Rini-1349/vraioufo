@@ -59,6 +59,15 @@ class Users extends Manager
 
 
     // Back Office
+
+    // Compte des users pour pagination
+    public function countUsers()
+    {
+        $db = $this->dbConnect();
+        $users = $db->query('SELECT * FROM users ');
+
+        return $users->rowCount();
+    }
     
     public function listUsers()
     {

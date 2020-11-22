@@ -48,9 +48,6 @@
                                             } ?>
                                     </ul>                                
                                 </li>
-                                <li class="nav-item">
-                                    
-                                </li>
                             <?php                       
                             }
                             else
@@ -65,7 +62,7 @@
                                             <a class="nav-link" href="index.php?action=subscription">S'INSCRIRE</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/www.solangebaron.com">PARTIR... VITE !</a>
+                                            <a class="nav-link" target="_blank" href="https://www.youtube.com/watch?v=TkBLWgSOV18">PARTIR... VITE !</a>
                                         </li>
                                     </ul>                                
                                 </li>

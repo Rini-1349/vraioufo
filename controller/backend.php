@@ -7,21 +7,34 @@ require_once('model/Votes.php');
 
 function homepageAdmin($currentPage, array $message = null)
 {
-    $firstPost = ($currentPage * 14) - 14;
-
-    $posts = new Posts();
-    $posts = $posts->listPosts($firstPost);
-
-    $categories = new Categories();
-    $categories = $categories->listCategories();
-
-    $users = new Users();
-    $users = $users->listUsers();
-
     require('view/backend/homepageAdminView.php');
 }
 
-function deleteUser($userId)
+function postsViewAdmin($currentPage, array $message = null)
+{
+    $post = new Posts();
+
+    $numberOfPosts = $post->countPosts();
+    $numberOfPages = ceil($numberOfPosts / 16);
+    $firstPost = ($currentPage * 16) - 16;
+
+    $posts = $post->listPosts($firstPost);
+
+    require('view/backend/postsView.php');
+}
+
+function usersViewAdmin($currentPage, array $message = null)
+{
+    $user = new Users();
+    $numberOfUsers = $user->countUsers();
+    $numberOfPages = ceil($numberOfUsers / 16);
+    $firstUser = ($currentPage * 16) - 16;
+
+    $users = $user->listUsers($firstUser);
+    require('view/backend/usersView.php');
+}
+
+function deleteUser($userId, $currentPage)
 {
     $users = new Users();
     $foundUser = $users->getUserById($userId);
@@ -46,35 +59,35 @@ function deleteUser($userId)
                 if ($users->deleteUser($userId))
                 {
                     $message[1] = 'Utilisateur supprimé';
-                    homepageAdmin($message);
+                    usersViewAdmin($currentPage, $message);
                 }
                 else
                 {
                     $message[0] = 'Une erreur est apparue pendant la suppression';
-                    homepageAdmin($message);
+                    usersViewAdmin($currentPage, $message);
                 }
             }   
             else
             {
                 $message[0] = 'Une erreur est apparue pendant la suppression';
-                homepageAdmin($message);
+                usersViewAdmin($currentPage, $message);
             }   
         }
         else
         {
             $message[0] = 'Une erreur est apparue pendant la suppression';
-            homepageAdmin($message);
+            usersViewAdmin($currentPage, $message);
         }
     }
     else
     {
         $message[0] = 'Cet utilisateur n\'existe pas';
-        homepageAdmin($message);
+        usersViewAdmin($currentPage, $message);
     }   
 }
 
 
-function deletePost($postId)
+function deletePost($postId, $currentPage)
 {
     $posts = new Posts();
     $foundPost = $posts->getPostById($postId);
@@ -88,23 +101,23 @@ function deletePost($postId)
             if ($posts->deletePost($postId))
             {
                 $message[1] = 'Article supprimé';
-                homepageAdmin($message);
+                postsViewAdmin($currentPage, $message);
             }
             else
             {
                 $message[0] = 'Une erreur est apparue pendant la suppression';
-                homepageAdmin($message);
+                postsViewAdmin($currentPage, $message);
             }   
         }
         else
         {
             $message[0] = 'Une erreur est apparue pendant la suppression';
-            homepageAdmin($message);
+            postsViewAdmin($currentPage, $message);
         }      
     }
     else
     {
         $message[0] = 'Cet article n\'existe pas';
-        homepageAdmin($message);
+        postsViewAdmin($currentPage, $message);
     }   
 }

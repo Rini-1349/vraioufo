@@ -159,21 +159,29 @@ try
                 {
                     $operation = $_GET['operation'];
 
-                    if ($operation == 'deleteUser' AND isset($_GET['userId']) AND (int)$_GET['userId'] != 0)
+                    if ($operation == 'postsView')
+                    {
+                        postsViewAdmin($currentPage, $message);                           
+                    }
+                    elseif ($operation == 'usersView')
+                    {
+                        usersViewAdmin($currentPage, $message);                           
+                    }
+                    elseif ($operation == 'deleteUser' AND isset($_GET['userId']) AND (int)$_GET['userId'] != 0)
                     {
                         if ($_GET['userId'] !== $_SESSION['id'])
                         {
-                            deleteUser($_GET['userId']);
+                            deleteUser($_GET['userId'], $currentPage);
                         }
                         else
                         {
                             $message[0] = 'Vous ne pouvez pas supprimer votre propre compte';
-                            homepageAdmin($currentPage, $message);
+                            usersViewAdmin($currentPage, $message);
                         }              
                     }
                     elseif ($operation == 'deletePost' AND isset($_GET['postId']) AND (int)$_GET['postId'] != 0)
                     {
-                        deletePost($_GET['postId']);
+                        deletePost($_GET['postId'], $currentPage);
                     }
                     else
                     {
@@ -207,5 +215,5 @@ try
 }
 catch(Exception $e)
 {
-    echo 'Erreur : ' . $e->getMessage();
+    echo 'Erreur : ' . $e->getMessage() . "\n" . $e->getCode();
 }

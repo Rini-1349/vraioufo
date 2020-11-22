@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -16,49 +17,63 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
         
     </head>
-    <body>
-        <div class="container">
-            <header>
-                <nav class="navbar navbar-light justify-content-between">
-                    <a class="navbar-brand" href="index.php?action=homepage">
-                        <h1 class="site-title">VRAI OUFO</h1>
-                        <small id="bobard">Bobard Land</small> 
-                    </a>
-                    <ul class="nav justify-content-end">
-                        <li class="nav-item"><a class="nav-link" href="index.php?action=homepage">Retour au site</a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.php?action=logout"><i class="fas fa-user-circle"></i> Se déconnecter</a></li>
+    <body id="top">
+        
+        <header class="menu">
+            <nav class="navbar navbar-expand-md navbar-light fixed-top menu">
+                <a class="navbar-brand mr-auto" href="index.php?action=homepage">
+                    <h1 class="site-title">&iquest;VR&Eacute; &Ugrave; F&Ocirc;?</h1>
+                    <small class="site-subtitle">La vie n'aura plus aucun secret pour vous ! Votez !</small> 
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <ul class="connect-subscr">
+                                <li>
+                                    <a class="nav-link" href="index.php?action=logout">SE D&Eacute;CONNECTER</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.php?action=homepage">RETOUR AU SITE</a>
+                                </li>
+                            </ul>                                
+                        </li>                               
                     </ul>
-                </nav>
-            </header>
-        </div>
-        <div class="container">
-            <div class="row">
-                <?php if (isset($message[0]))
+                </div>
+            </nav>                   
+        </header>
+        <?php if (isset($message[0]))
                 {
                 ?>
-                    <div class="col-12">
-                        <div class="text-danger"><?= $message[0] ?></div>
-                    </div>
+                    <div class="alert-danger text-center"><?= $message[0] ?></div>
+
                 <?php
                 }
                 if (isset($message[1]))
                 {
                 ?>
-                    <div class="col-12">
-                        <div class="text-success"><?= $message[1] ?></div>
-                    </div>
+                    <div class="alert-success text-center"><?= $message[1] ?></div>
                 <?php
                 }
-                ?>
-            </div>
-            
-            <?= $content ?>
-        </div>
+        ?>
+
+        <div class="container-fluid">
+            <?= $content ?>   
+        </div>    
         <footer>
-            <div class="col-2 offset-10">
-            <a href=""><i class="fas fa-angle-double-up fa-2x"></i></a>
-            </div>
-            
-        </footer>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-11">
+                        <p class="text-center">Copyright 2020 &copy;BaronDeCarrese</p>
+                    </div>
+                    <div class="col-1">
+                        <a href="#top" title="Haut de page"><i class="fas fa-angle-double-up fa-2x"></i></a>
+                    </div>    
+                </div>              
+            </div>        
+        </footer>     
     </body>
 </html>

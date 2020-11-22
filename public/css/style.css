@@ -79,6 +79,7 @@ a, a:hover, a:visited{
 /* Alertes */
 .alert-danger, .alert-success {
     margin-top: 9em;
+    margin-bottom: -9em;
     padding: 0.5em;
 }
 @media screen and (max-width: 380px) {
@@ -105,9 +106,9 @@ footer {
         padding-right: 0px !important;
     }
 }
-@media screen and (max-width: 768px) and (min-width: 576px) {
+@media screen and (max-width: 991px) and (min-width: 576px) {
     .content {
-        padding: 0% 10%;
+        padding: 0% 1%;
     }
 }
 @media screen and (min-width: 992px) {
@@ -124,7 +125,7 @@ footer {
 
 /* Liste des catégpries */
 .category {
-    margin: 2em 2em;
+    margin: 0.8em 0em;
     border: 1px solid #bbbbbb;
     border-radius: 20px;
 }
@@ -137,7 +138,7 @@ footer {
     font-size: 1.5em;
 }
 
-.category a {
+.category a, .category div {
     color: #a26822;
 }
 
@@ -145,6 +146,25 @@ footer {
     .category {
         margin: 1em 0.5em;
     }
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+.category_page {
+    padding: 0.3em 0.3em;
+    font-size: 1.5em;
+}
+
+.category_page:hover {
+    background-color:white;
+}
+.category_description {
+    margin-bottom: 2em;
+    font-size: 1.5em;
+    color: #9e9e9e;
+    margin-top: -0.6em;
 }
 
 
@@ -178,6 +198,7 @@ h3 {
         margin: 1em 0em;
     }
 }
+
 
 
 /* Boutons vote */
@@ -232,6 +253,7 @@ h3 {
 }
 
 
+
 /* Couleurs icônes */
 .true {
     color: #64bd3b;
@@ -245,6 +267,11 @@ h3 {
     color: #f7cd46;
 }
 
+.link_color {
+    color: #b02907;
+}
+
+
 
 /* Les contenus possibles en réponse à "Déjà ?" */
 .hidden {
@@ -252,28 +279,21 @@ h3 {
 }
 
 
-/* Formulaires */
 
-input.invalid{
-    border-color: red;
-    background-color: #FDD;
-}
-
-.error {
-    width  : 100%;
-    padding: 0;
-   
-    font-size: 80%;
-    color: red;
-   /* background-color: red;*/
-    border-radius: 5px 5px 5px 5px;
-
-}
-  
-.error.active {
-    padding: 0.3em;
-}
+/* Boutons */
 .btn-primary {
-    background-color: pink;
-    border: solid 1px red;
+    background-color: #b02907 !important;
+    border: 1px solid #b02907 !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background-color: #f5b63d !important;
+    border: 1px solid orange !important;
+    color: black !important;
+}
+
+.add_article {
+    padding-left: 2em;
+    margin-bottom: 1em;
 }

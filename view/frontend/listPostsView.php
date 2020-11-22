@@ -3,32 +3,43 @@
 <?php ob_start(); ?>
 
 
-<div class="container-fluid content form_page">
-    <?php if ($_SESSION)
-    {
-    ?>
-        <a href="index.php?action=addPost" class="btn btn-primary btn-lg active" role="button"><i class="fas fa-pen-nib"></i> Ajouter un article</a>
+<div class="container-fluid content">
+    <div class="row">   
+        <div class="col-12 add_article">
+        <?php if ($_SESSION):?>  
+            <a href="index.php?action=addPost" class="btn btn-primary btn-lg active" role="button">
+                <i class="fas fa-pen-nib"></i> Ajouter un article
+            </a>
+        <?php else: ?>
+            <a href="index.php?action=connection" class="btn btn-primary btn-lg active" role="button">
+                <i class="fas fa-pen-nib"></i> Ajouter un article
+            </a>
+        <?php endif ?>
+        </div>              
+    </div>
     <?php
-    }
-
     if (isset($category) AND !empty($category)): ?>
         <div class="row">
-            <div class="col-12 col-md-6 mx-auto">
-                <h2><?= $category['title'] ?></h2>
-            </div>
+            <div class="col-11 col-md-6 col-sm-9 mx-auto text-center category category_page">            
+                <div class="text-uppercase <?= ($category['title'] == 'Le monde à l\'envers') ? "rotate" : "" ?>">
+                    <?= $category['img'] ?><?= $category['title'] ?>
+                </div>         
+            </div>    
         </div>
         <div class="row">
-            <div class="col-12 col-md-6 mx-auto">
-                <p><?= $category['description'] ?></p>
+            <div class="col-12 col-md-6 col-sm-9 mx-auto text-center category_description">
+                <?= $category['description'] ?>
             </div>
         </div>
     <?php else:?>
-        <div class="row align-items-center justify-content-center mx-auto">    
+        <div class="row align-items-center justify-content-center">    
             <?php foreach ($categories as $category): ?>
-                <div class="col-9 col-md-3 col-sm-5 text-center category">     
-                    <a href="index.php?action=category&categoryId=<?= $category['id'] ?>">
-                        <div class="text-uppercase"><?= $category['img'] ?><?= $category['title'] ?></div>         
-                    </a>                            
+                <div class="col-11 col-md-4 col-sm-6"> 
+                    <div class="text-center category">
+                        <a href="index.php?action=category&categoryId=<?= $category['id'] ?>">
+                            <div class="text-uppercase <?= ($category['title'] == 'Le monde à l\'envers') ? "rotate" : "" ?>"><?= $category['img'] ?><?= $category['title'] ?></div>         
+                        </a>   
+                    </div>                                                
                 </div>
             <?php endforeach ?>  
         </div>
@@ -51,7 +62,11 @@
                                 </p>
                             </div>
                             <div class="col-12 article_content">
-                                <p><?= htmlspecialchars($post['content']) ?></p>
+                                <?php if ($post['category_title'] == 'Le monde à l\'envers' AND (!isset($_SESSION['id']) OR ($post['user_id'] != $_SESSION['id'] AND $post['vote'] == null))):?>
+                                    <p><small>Tu découvriras l'article après avoir voté</small></p>
+                                <?php else: ?>
+                                    <p><?= htmlspecialchars($post['content']) ?></p>
+                                <?php endif ?>
                             </div>
                             <div class="col-12 justify-content-center">
                                 <div class="row">
@@ -60,7 +75,7 @@
                                                 <div class="btn">
                                                     <a href="index.php?action=connection">                                                   
                                                     VOTER
-                                                        <span class="false">
+                                                        <span class="link_color">
                                                             <i class="fas fa-angle-double-right"></i>
                                                         </span>
                                                     </a>
@@ -102,7 +117,7 @@
                                             endif
                                         
                                         ?>
-                                        <div class="col-2 col-sm-3 responses">
+                                        <div class="col-3  responses">
                                             <div class="btn">
                                                 <span class="true">
                                                     <i class="far fa-check-circle"></i>
@@ -110,12 +125,12 @@
                                                 <?= $responses[$post['id']][1] ?>
                                             </div>
                                         </div>
-                                        <div class="col-8 col-sm-6 responses">
+                                        <div class="col-6 responses">
                                             <div class="btn">
                                                 <?= $response ?>
                                             </div>
                                         </div>
-                                        <div class="col-2 col-sm-3 responses">
+                                        <div class="col-3 responses">
                                             <div class="btn">
                                                 <span class="false">
                                                     <i class="fas fa-times"></i>
