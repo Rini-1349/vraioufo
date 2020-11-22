@@ -41,7 +41,7 @@ function listPosts($currentPage, $message, $categoryId = null)
 
         foreach ($votes as $vote)
         {
-            if ($vote['value'] == $post['true_value'])
+            if ($post['true_value'] == 1)
             {
                 $trueResponses++;
             }

@@ -99,20 +99,27 @@
                                                                 </span>
                                                                 Oui, c\'est vrai';
                                                 }
-                                            elseif ($post['vote'] != null):                                      
+                                            elseif ($post['vote'] != null):     
+                                                if ($post['true_value'] == 0)
+                                                {
+                                                    $icone = '<span class="false">
+                                                                <i class="fas fa-times"></i>
+                                                            </span>';
+                                                }  
+                                                else
+                                                {
+                                                    $icone = '<span class="true">
+                                                                <i class="far fa-check-circle"></i>
+                                                            </span>';
+                                                }    
+                                                                           
                                                 if ($post['vote'] == $post['true_value'])
                                                 {
-                                                    $response = '<span class="true">
-                                                                    <i class="far fa-check-circle"></i>
-                                                                </span>
-                                                                EN EFFET ! BRAVO !';
+                                                    $response = $icone . ' EN EFFET ! BRAVO !';
                                                 }
                                                 else
                                                 {
-                                                    $response = '<span class="false">
-                                                                    <i class="fas fa-times"></i>
-                                                                </span>
-                                                                PAS DE BOL...';
+                                                    $response = $icone . ' PAS DE BOL...';
                                                 }
                                             endif
                                         
