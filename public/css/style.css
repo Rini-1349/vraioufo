@@ -144,7 +144,7 @@ footer {
 
 @media screen and (max-width: 840px) {
     .category {
-        margin: 1em 0.5em;
+        margin: 0.5em 0.5em;
     }
 }
 
@@ -267,6 +267,10 @@ h3 {
     color: #f7cd46;
 }
 
+.pink {
+    color: pink;
+}
+
 .link_color {
     color: #b02907;
 }
@@ -296,4 +300,9 @@ h3 {
 .add_article {
     padding-left: 2em;
     margin-bottom: 1em;
+}
+
+
+.barre {
+    text-decoration:line-through;
 }
