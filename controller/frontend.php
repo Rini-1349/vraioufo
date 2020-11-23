@@ -179,11 +179,11 @@ function submitVote(array $vote, $currentPage)
         $votes = new Votes();
         if ($newVote = $votes->addVote($vote))
         {
-            header('Location: index.php?action=homepage&page=' . $currentPage);
+            header('Location: index.php?action=homepage&page=' . $currentPage . '#article-' . $vote['postId']);
         }
         else
         {
-            header('Location: index.php?action=homepage&page=' . $currentPage);
+            header('Location: index.php?action=homepage&page=' . $currentPage . '#article-' . $vote['postId']);
         }
     }
     else
