@@ -215,5 +215,13 @@ try
 }
 catch(Exception $e)
 {
-    echo 'Erreur : ' . $e->getMessage() . "\n" . $e->getCode();
+    if ($e->getCode() == 23000) // Rafraichissement page après vote lance une nouvelle requête
+    {
+        $currentPosition['page'] = 1;
+        listPosts($currentPosition, $message);
+    }
+    else
+    {
+        echo 'Erreur : ' . $e->getMessage() . "\n" . $e->getCode();
+    }
 }

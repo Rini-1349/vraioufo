@@ -41,7 +41,7 @@ function listPosts($currentPage, $message, $categoryId = null)
 
         foreach ($votes as $vote)
         {
-            if ($post['true_value'] == 1)
+            if ($vote['value'] == 1)
             {
                 $trueResponses++;
             }
@@ -64,60 +64,6 @@ function listPosts($currentPage, $message, $categoryId = null)
     }
 
         require('view/frontend/listPostsView.php');
-
-
-    
-}
-
-function listPostsByCategory($categoryId, $currentPage)
-{
-    $post = new Posts();
-
-    $numberOfPostsByCategory = $post->countPosts($categoryId);
-    $numberOfPages = ceil($numberOfPostsByCategory / 14);
-    $firstPost = ($currentPage * 14) - 14;
-
-    $postsByCategory = $post->listPosts($firstPost, $categoryId);
-    $foundPosts = $post->listPosts($firstPost, $categoryId);
-
-    $categories = new Categories();
-    $category = $categories->getCategory($categoryId);
-
-    $responses = [];
-
-    foreach ($foundPosts as $post)
-    {
-        $votes = new Votes();
-        $votes = $votes->getVotesByPost($post['id']);
-
-        $trueResponses = 0;
-        $falseResponses = 0;
-
-        foreach ($votes as $vote)
-        {
-            if ($vote['value'] == $post['true_value'])
-            {
-                $trueResponses++;
-            }
-            else
-            {
-                $falseResponses++;
-            }
-        }
-
-        $responses[$post['id']] = [$falseResponses, $trueResponses];
-    }
-
-    $deja = new Deja();
-    $dejaContent = $deja->getDejaContent();
-    $dejaElements = '';
-
-    foreach ($dejaContent as $dejaElement)
-    {
-        $dejaElements .= $dejaElement['content'] . ';';
-    }
-
-    require('view/frontend/categoryView.php');
 }
 
 

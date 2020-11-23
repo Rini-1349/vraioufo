@@ -48,7 +48,7 @@
         <div class="row align-items-center">
             <?php foreach ($posts as $post): ?>
                 <div class="col-12 col-lg-6 col-md-6">
-                    <article class="last_posts text-center">
+                    <article class="last_posts text-center" id="article-<?= $post['id'] ?>">
                         <div class="row">
                             <div class= "col-12 mx-auto">
                                 <h3 class="text-uppercase"><?= htmlspecialchars(strtoupper($post['title'])) ?></h3>
@@ -112,7 +112,7 @@
                                                                 <i class="far fa-check-circle"></i>
                                                             </span>';
                                                 }    
-                                                                           
+
                                                 if ($post['vote'] == $post['true_value'])
                                                 {
                                                     $response = $icone . ' EN EFFET ! BRAVO !';
@@ -204,16 +204,16 @@
         </nav>
 </div>
 <div class="hidden" id="hidden_deja"><?= $dejaElements ?></div>
-    <script>
-        const dejaElmts = document.getElementById('hidden_deja').innerHTML.split(';');
 
-        function deja(dejaButton){
-            const random = Math.floor(Math.random() * (dejaElmts.length - 1));
-            const dejaElmt = (random, dejaElmts[random]);
-            //element.innerHTML = "<p>" + dejaElmt + "</p>";
-            dejaButton.innerHTML = '<span class="sosoon"><i class="far fa-clock"></i></span> ' + dejaElmt;
-        }
-    </script>
+<script>
+    const dejaElmts = document.getElementById('hidden_deja').innerHTML.split(';');
+
+    function deja(dejaButton){
+        const random = Math.floor(Math.random() * (dejaElmts.length - 1));
+        const dejaElmt = (random, dejaElmts[random]);
+        dejaButton.innerHTML = '<span class="sosoon"><i class="far fa-clock"></i></span> ' + dejaElmt;
+    }
+</script>
 
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>
