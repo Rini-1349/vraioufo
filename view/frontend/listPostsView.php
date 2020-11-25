@@ -1,22 +1,46 @@
-<?php $title = 'Vré ù Fô - Accueil'; ?>
+<?php $title = 'Vré ù Fô - Bienvenue !'; ?>
 
 <?php ob_start(); ?>
 
 
 <div class="container-fluid content">
-    <div class="row">   
-        <div class="col-12 add_article">
-        <?php if ($_SESSION):?>  
-            <a href="index.php?action=addPost" class="btn btn-primary btn-lg active" role="button">
-                <i class="fas fa-pen-nib"></i> Ajouter un article
-            </a>
-        <?php else: ?>
-            <a href="index.php?action=connection" class="btn btn-primary btn-lg active" role="button">
-                <i class="fas fa-pen-nib"></i> Ajouter un article
-            </a>
+    <div class="row justify-content-center">   
+        <?php if ($_SESSION): ?>
+            <div class="col-6">
+                <div class="score text-center">
+                    <span class="true">
+                        <i class="far fa-check-circle"></i>
+                    </span>
+                    <span class="d-none d-sm-inline">
+                        Tu as été plutôt bon 
+                    </span>
+                    <?= $_SESSION['trueResponses'] ?>
+                    <span class="d-none d-sm-inline"> 
+                        fois
+                    </span>
+                </div>               
+            </div>
+            <div class="col-6">
+                <div class="score text-center">
+                    <span class="false">
+                        <i class="fas fa-times"></i>
+                    </span>
+                    <span class="d-none d-sm-inline">
+                        Tu as été plutôt mauvais 
+                    </span>
+                    <?= $_SESSION['falseResponses'] ?>
+                    <span class="d-none d-sm-inline"> 
+                        fois
+                    </span>
+                </div>
+            </div> 
         <?php endif ?>
-        </div>              
-    </div>
+        <div class="col-12 add_article">
+            <a href="index.php?action=<?= ($_SESSION) ? "addPost" : "connection" ?>" class="btn btn-primary btn-lg active" role="button">
+                <i class="fas fa-pen-nib"></i> Ajouter un article
+            </a>
+        </div>                                  
+    </div>     
     <?php
     if (isset($category) AND !empty($category)): ?>
         <div class="row">
@@ -33,7 +57,7 @@
         </div>
     <?php else:?>
         <div class="row align-items-center justify-content-center">    
-            <?php foreach ($categories as $category): ?>
+            <?php foreach ($categoriesList as $category): ?>
                 <div class="col-11 col-md-4 col-sm-6"> 
                     <div class="text-center category">
                         <a href="index.php?action=category&categoryId=<?= $category['id'] ?>">
@@ -188,17 +212,17 @@
             <ul class="pagination justify-content-center">
                 <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
                 <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                    <a href="index.php?action=homepage&page=<?= $currentPage - 1 ?>" class="page-link">Précédente</a>
+                    <a href="index.php?action=<?= (isset($categoriesList)) ? "homepage" : "category&categoryId=" . $category['id'] ?>&page=<?= $currentPage - 1 ?>" class="page-link">Précédente</a>
                 </li>
                 <?php for($page = 1; $page <= $numberOfPages; $page++): ?>
                     <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
                     <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
-                        <a href="index.php?action=homepage&page=<?= $page ?>" class="page-link"><?= $page ?></a>
+                        <a href="index.php?action=<?= (isset($categoriesList)) ? "homepage" : "category&categoryId=" . $category['id'] ?>&page=<?= $page ?>" class="page-link"><?= $page ?></a>
                     </li>
                 <?php endfor ?>
                     <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
                     <li class="page-item <?= ($currentPage == $numberOfPages) ? "disabled" : "" ?>">
-                    <a href="index.php?action=homepage&page=<?= $currentPage + 1 ?>" class="page-link">Suivante</a>
+                    <a href="index.php?action<?= (isset($categoriesList)) ? "homepage" : "category&categoryId=" . $category['id'] ?>&page=<?= $currentPage + 1 ?>" class="page-link">Suivante</a>
                 </li>
             </ul>
         </nav>

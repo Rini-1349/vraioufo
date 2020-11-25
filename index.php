@@ -217,8 +217,7 @@ catch(Exception $e)
 {
     if ($e->getCode() == 23000) // Rafraichissement page après vote lance une nouvelle requête
     {
-        $currentPosition['page'] = 1;
-        listPosts($currentPosition, $message);
+        listPosts(1, $message);
     }
     else
     {

@@ -31,6 +31,20 @@ class Votes extends Manager
         return $newVote;
     }
 
+    public function getVotesFromUser($userId)
+    {
+        $db = $this->dbConnect();
+        $votes = $db->prepare('SELECT votes.value AS value,
+                                posts.true_value AS true_value
+                                FROM votes 
+                                LEFT JOIN posts ON votes.post_id = posts.id
+                                WHERE votes.user_id = :userId');
+        $votes->execute(array(
+            'userId' => $userId
+        ));
+
+        return $votes;
+    }
 
 
     

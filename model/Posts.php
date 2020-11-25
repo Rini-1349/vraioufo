@@ -5,11 +5,11 @@ require_once('Manager.php');
 class Posts extends Manager
 {
     // Compte des posts pour pagination
-    public function countPosts($category = null)
+    public function countPosts($categoryId = null)
     {
-        if ($category)
+        if ($categoryId)
         {
-            $whereCategory = 'WHERE posts.category_id = ' . $category . ' ';
+            $whereCategory = 'WHERE posts.category_id = ' . $categoryId . ' ';
         }
         else
         {
@@ -96,11 +96,6 @@ class Posts extends Manager
         return $post;
     }
 
-    
-
-
-    // Back Office
-
     public function getPostById($postId)
     {
         $db = $this->dbConnect();
@@ -112,6 +107,11 @@ class Posts extends Manager
 
         return $foundPost;
     }
+
+    
+
+
+    // Back Office
 
     public function getPostsFromUser($userId)
     {

@@ -123,6 +123,28 @@ footer {
 }
 
 
+/* Score */
+.score {
+    margin: 0em 3em 2em 3em;
+    padding: 0.2em;
+    border: 1px solid #bbbbbb;
+    border-radius: 20px;
+}
+
+@media screen and (max-width: 740px) and (min-width: 576px){
+    .score {
+        margin: 0em 0.9em 2em 0.9em;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .score {
+        margin: 0em 2.5em 1em 2.5em;
+    }
+}
+
+
+
 /* Liste des catégpries */
 .category {
     margin: 0.8em 0em;

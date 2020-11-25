@@ -10,7 +10,7 @@ function listPosts($currentPage, $message, $categoryId = null)
 {
     $post = new Posts();
 
-    $numberOfPosts = $post->countPosts();
+    $numberOfPosts = $post->countPosts($categoryId);
     $numberOfPages = ceil($numberOfPosts / 16);
     $firstPost = ($currentPage * 16) - 16;
 
@@ -26,7 +26,7 @@ function listPosts($currentPage, $message, $categoryId = null)
     {
         $posts = $post->listPosts($firstPost);
         $foundPosts = $post->listPosts($firstPost);
-        $categories = $categories->listCategories();
+        $categoriesList = $categories->listCategories();
     }
     
     $responses = [];
@@ -104,15 +104,15 @@ function sendConfirmationMail(array $user)
     $subject = '=?UTF-8?B?'.base64_encode('Inscription validée').'?=';
 
     $mailContent = 'Salut ' . $user['first_name'] . ',' . "\n" . "\n";
-    $mailContent .= 'Ton inscription sur le site Vrai Oufo a bien été prise en compte.' . "\n"; 
+    $mailContent .= 'Ton inscription sur le site Vré ù Fô a bien été prise en compte.' . "\n"; 
     $mailContent .= 'Tu peux te connecter sur le site avec ton pseudo ou ton adresse mail.' . "\n" . "\n";
     $mailContent .= 'Pour rappel, voici tes informations personnelles : ' . "\n";
     $mailContent .= 'Pseudo : ' . $user['pseudo'] . "\n";
     $mailContent .= 'Adresse mail : ' . $user['email'] . "\n" . "\n";
     $mailContent .= 'A très bientôt !' . "\n";
 
-    $headers = ['From' => 'vraioufo@solangebaron.com',
-    'Reply-To' => 'vraioufo@solangebaron.com',
+    $headers = ['From' => 'confirmation@vreufo.com',
+    'Reply-To' => 'confirmation@vreufo.com',
     'Content-Type: text/plain; charset="utf-8"',
     'Content-Transfer-Encoding: 8bit',
     'X-Mailer' => 'PHP/' . phpversion()];
@@ -135,13 +135,30 @@ function connection($login, $pass)
         $isPasswordCorrect = password_verify($pass, $foundUser['password']);
         if ($isPasswordCorrect)
         {
+            $votes = new Votes();
+            $userVotes = $votes->getVotesFromUser($foundUser['id']);
+            $trueResponses = 0;
+            $falseResponses = 0;
+            foreach ($userVotes as $vote)
+            {
+                if ($vote['value'] == $vote['true_value'])
+                {
+                    $trueResponses++;
+                }
+                else
+                {
+                    $falseResponses++;
+                }
+            }
             session_start();
             $_SESSION = array(
                 'id' => $foundUser['id'],
                 'name' => $foundUser['name'],
                 'first_name' => $foundUser['first_name'],
                 'pseudo' => $foundUser['pseudo'],
-                'role' => $foundUser['role']
+                'role' => $foundUser['role'],
+                'trueResponses' => $trueResponses,
+                'falseResponses' => $falseResponses
             );
             header('Location: index.php?action=homepage');
         }
@@ -171,14 +188,23 @@ function createPost(array $newPost)
 
 function submitVote(array $vote, $currentPage)
 {
-    $posts = new Posts();
-    $postIsMine = $posts->postIsMine($vote);
+    $post = new Posts();
+    $postIsMine = $post->postIsMine($vote);
 
     if (!$postIsMine)
-    {
+    {   
         $votes = new Votes();
         if ($newVote = $votes->addVote($vote))
         {
+            $post = $post->getPostById($vote['postId']);
+            if ($post['true_value'] == $vote['value'])
+            {
+                $_SESSION['trueResponses']++;
+            }
+            else
+            {
+                $_SESSION['falseResponses']++;
+            }
             header('Location: index.php?action=homepage&page=' . $currentPage . '#article-' . $vote['postId']);
         }
         else

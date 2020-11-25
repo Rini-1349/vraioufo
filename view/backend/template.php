@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Vrai Oufo">
+        <meta name="description" content="Vré ù Fô">
 
         <title><?= $title ?></title>
         <link rel="icon" sizes="192x192" href="public/img/vreufo_favicon.png">
