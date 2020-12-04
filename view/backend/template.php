@@ -10,7 +10,8 @@
         <title><?= $title ?></title>
         <link rel="icon" sizes="192x192" href="public/img/vreufo_favicon.png">
         
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <!-- Bootstrap 4.5.3 modifié pour passer la validation CSS -->
+        <link type="text/css" rel="stylesheet" href="public/css/bootstrap/bootstrap.min.css" />
         <link type="text/css" rel="stylesheet" href="public/css/style.css" />
         
         <script src="https://kit.fontawesome.com/d9058ae961.js" crossorigin="anonymous"></script>
