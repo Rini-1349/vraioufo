@@ -5,12 +5,12 @@ require_once('model/Categories.php');
 require_once('model/Votes.php');
 
 
-function homepageAdmin($currentPage, array $message = null)
+function homepageAdmin($currentPage, array $message)
 {
     require('view/backend/homepageAdminView.php');
 }
 
-function postsViewAdmin($currentPage, array $message = null)
+function postsViewAdmin($currentPage, array $message)
 {
     $post = new Posts();
 
@@ -23,7 +23,7 @@ function postsViewAdmin($currentPage, array $message = null)
     require('view/backend/postsView.php');
 }
 
-function usersViewAdmin($currentPage, array $message = null)
+function usersViewAdmin($currentPage, array $message)
 {
     $user = new Users();
     $numberOfUsers = $user->countUsers();

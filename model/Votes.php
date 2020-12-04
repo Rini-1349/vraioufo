@@ -39,9 +39,9 @@ class Votes extends Manager
                                 FROM votes 
                                 LEFT JOIN posts ON votes.post_id = posts.id
                                 WHERE votes.user_id = :userId');
-        $votes->execute(array(
+        $votes->execute([
             'userId' => $userId
-        ));
+        ]);
 
         return $votes;
     }
@@ -54,7 +54,9 @@ class Votes extends Manager
     {
         $db = $this->dbConnect();
         $votes = $db->prepare('DELETE FROM votes WHERE post_id = :postId');
-        $deletedVotes = $votes->execute(['postId' => $postId]);
+        $deletedVotes = $votes->execute([
+            'postId' => $postId
+        ]);
 
         return $deletedVotes;
     }
@@ -63,7 +65,9 @@ class Votes extends Manager
     {
         $db = $this->dbConnect();
         $votes = $db->prepare('DELETE FROM votes WHERE user_id = :userId');
-        $deletedVotes = $votes->execute(['userId' => $userId]);
+        $deletedVotes = $votes->execute([
+            'userId' => $userId
+        ]);
 
         return $deletedVotes;
     }

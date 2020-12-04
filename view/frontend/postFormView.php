@@ -10,7 +10,6 @@
 				<div class="form-group">
 					<label for="title">Titre de l'article</label>
 					<input type="text" class="form-control" name="title" id="title" autofocus required />
-
 				</div>
 
 				<div class="form-group">
@@ -21,7 +20,7 @@
 						foreach ($categories as $category)
 						{
 						?>
-						<option value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
+							<option value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
 						<?php
 						}
 						?>
@@ -37,7 +36,10 @@
 				</div>
 				<div class="form-group">
 					<label for="content">Contenu de l'article</label>
-					<textarea name="content" id="content" class="form-control" cols="40" rows="5" required ></textarea>
+					<textarea name="content" id="content" class="form-control" cols="40" rows="5" maxlength="255" aria-describedby="content_maxlength" required ></textarea>
+					<small id="content_maxlength" class="text-muted">
+						Limité à 255 caractères
+					</small>
 				</div>
 				<button class="btn btn-primary" type="submit">Enregistrer l'article</button>
 			</form>

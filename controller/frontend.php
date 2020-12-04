@@ -10,6 +10,7 @@ function listPosts($currentPage, $message, $categoryId = null)
 {
     $post = new Posts();
 
+    // Elaboration pagination
     $numberOfPosts = $post->countPosts($categoryId);
     $numberOfPages = ceil($numberOfPosts / 16);
     $firstPost = ($currentPage * 16) - 16;
@@ -78,6 +79,54 @@ function subscriptionForm($message = null)
     require('view/frontend/subscriptionView.php');
 }
 
+function connection($login, $pass)
+{
+    $user = new Users();
+    $foundUser = $user->getUser($login);
+
+    if (!$foundUser)
+    {
+        $message[0] = 'Login ou mot de passe incorrect';
+        connectionForm($message);
+    }
+    else
+    {
+        if (password_verify($pass, $foundUser['password']))
+        {
+            $votes = new Votes();
+            $userVotes = $votes->getVotesFromUser($foundUser['id']);
+            $trueResponses = 0;
+            $falseResponses = 0;
+            foreach ($userVotes as $vote)
+            {
+                if ($vote['value'] == $vote['true_value'])
+                {
+                    $trueResponses++;
+                }
+                else
+                {
+                    $falseResponses++;
+                }
+            }
+            session_start();
+            $_SESSION = [
+                'id' => $foundUser['id'],
+                'name' => $foundUser['name'],
+                'first_name' => $foundUser['first_name'],
+                'pseudo' => $foundUser['pseudo'],
+                'role' => $foundUser['role'],
+                'trueResponses' => $trueResponses,
+                'falseResponses' => $falseResponses
+            ];
+            header('Location: index.php?action=homepage');
+        }
+        else
+        {
+            $message[0] = 'Login ou mot de passe incorrect';
+            connectionForm($message);
+        }
+    }
+}
 
 function addUser(array $user)
 {
@@ -87,8 +136,13 @@ function addUser(array $user)
     {
         if ($newUser->addUser($user))
         {
-        sendConfirmationMail($user);
-        connection($user['email'], $user['password']);
+            sendConfirmationMail($user);
+            connection($user['email'], $user['password']);
+        }
+        else
+        {
+            $message[0] = 'Une erreur est survenue. Merci de réessayer';
+            require('view/frontend/subscriptionView.php');
         }
     }
     else
@@ -97,7 +151,6 @@ function addUser(array $user)
         require('view/frontend/subscriptionView.php');
     }
 }
-
 
 function sendConfirmationMail(array $user)
 {
@@ -120,57 +173,6 @@ function sendConfirmationMail(array $user)
     return mail($user['email'], $subject, $mailContent, $headers);
 }
 
-function connection($login, $pass)
-{
-    $user = new Users();
-    $foundUser = $user->getUser($login);
-
-    if (!$foundUser)
-    {
-        $message[0] = 'Login ou mot de passe incorrect';
-        connectionForm($message);
-    }
-    else
-    {
-        $isPasswordCorrect = password_verify($pass, $foundUser['password']);
-        if ($isPasswordCorrect)
-        {
-            $votes = new Votes();
-            $userVotes = $votes->getVotesFromUser($foundUser['id']);
-            $trueResponses = 0;
-            $falseResponses = 0;
-            foreach ($userVotes as $vote)
-            {
-                if ($vote['value'] == $vote['true_value'])
-                {
-                    $trueResponses++;
-                }
-                else
-                {
-                    $falseResponses++;
-                }
-            }
-            session_start();
-            $_SESSION = array(
-                'id' => $foundUser['id'],
-                'name' => $foundUser['name'],
-                'first_name' => $foundUser['first_name'],
-                'pseudo' => $foundUser['pseudo'],
-                'role' => $foundUser['role'],
-                'trueResponses' => $trueResponses,
-                'falseResponses' => $falseResponses
-            );
-            header('Location: index.php?action=homepage');
-        }
-        else
-        {
-            $message[0] = 'Login ou mot de passe incorrect';
-            connectionForm($message);
-        }
-    }
-}
-
-
 function postForm($message = null)
 {
     $categories = new Categories();
@@ -179,24 +181,32 @@ function postForm($message = null)
     require('view/frontend/postFormView.php');
 }
 
-function createPost(array $newPost)
+function createPost(array $newPost, $currentPage)
 {
     $post = new Posts();
-    $createdPost = $post->addPost($newPost);
-    header('Location: index.php?action=homepage');
+    if ($post->addPost($newPost))
+    {
+        $message[1] = 'Merci ! Ton article a bien été ajouté';
+        listPosts($currentPage, $message);
+    }
+    else
+    {
+        $message[0] = 'Un problème est apparu pendant l\'enregistrement de ton article. Merci de réessayer';
+        require('view/frontend/postFormView.php');
+    }
 }
 
 function submitVote(array $vote, $currentPage)
 {
-    $post = new Posts();
-    $postIsMine = $post->postIsMine($vote);
+    $posts = new Posts();
+    $postIsMine = $posts->postIsMine($vote);
 
     if (!$postIsMine)
     {   
         $votes = new Votes();
-        if ($newVote = $votes->addVote($vote))
+        if ($votes->addVote($vote))
         {
-            $post = $post->getPostById($vote['postId']);
+            $post = $posts->getPostById($vote['postId']);
             if ($post['true_value'] == $vote['value'])
             {
                 $_SESSION['trueResponses']++;
@@ -214,7 +224,6 @@ function submitVote(array $vote, $currentPage)
     }
     else
     {
-        $message[0] = 'Impossible de voter sur mon article';
         header('Location: index.php?action=homepage&page=' . $currentPage);
     }
 }

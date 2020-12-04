@@ -9,7 +9,7 @@ class Posts extends Manager
     {
         if ($categoryId)
         {
-            $whereCategory = 'WHERE posts.category_id = ' . $categoryId . ' ';
+            $whereCategory = ' WHERE posts.category_id = ' . $categoryId . ' ';
         }
         else
         {
@@ -17,7 +17,7 @@ class Posts extends Manager
         }
 
         $db = $this->dbConnect();
-        $posts = $db->query('SELECT * FROM posts ' . $whereCategory);
+        $posts = $db->query('SELECT * FROM posts' . $whereCategory);
 
         return $posts->rowCount();
     }
@@ -74,17 +74,16 @@ class Posts extends Manager
             'postId' => $vote['postId'],
             'userId' => $vote['userId']
         ]);
-
-        $postIsMine = $post->rowCount();
         
-        return (bool)$postIsMine;
+        return (bool)$post->rowCount();
     }
 
     // Ajouter un post
     public function addPost($newPost)
     {
         $db = $this->dbConnect();
-        $post = $db->prepare('INSERT INTO posts (user_id, category_id, title, content, true_value, created) VALUES (:userId, :category_id, :title, :content, :true_value, NOW())');
+        $post = $db->prepare('INSERT INTO posts (user_id, category_id, title, content, true_value, created) 
+                                VALUES (:userId, :category_id, :title, :content, :true_value, NOW())');
         $post = $post->execute([
             'userId' => $newPost['userId'],
             'title' => $newPost['title'],
@@ -103,9 +102,8 @@ class Posts extends Manager
         $post->execute(array(
             'postId' => $postId
         ));
-        $foundPost = $post->fetch();
 
-        return $foundPost;
+        return $post->fetch();
     }
 
     
@@ -117,9 +115,9 @@ class Posts extends Manager
     {
         $db = $this->dbConnect();
         $posts = $db->prepare('SELECT * FROM posts WHERE user_id = :userId');
-        $posts->execute(array(
+        $posts->execute([
             'userId' => $userId
-        ));
+        ]);
 
         return $posts;
     }
@@ -128,7 +126,9 @@ class Posts extends Manager
     {
         $db = $this->dbConnect();
         $post = $db->prepare('DELETE FROM posts WHERE id = :postId');
-        $deletedPost = $post->execute(['postId' => $postId]);
+        $deletedPost = $post->execute([
+            'postId' => $postId
+        ]);
 
         return $deletedPost;
     }
@@ -137,7 +137,9 @@ class Posts extends Manager
     {
         $db = $this->dbConnect();
         $posts = $db->prepare('DELETE FROM posts WHERE user_id = :userId');
-        $deletedPosts = $posts->execute(['userId' => $userId]);
+        $deletedPosts = $posts->execute([
+            'userId' => $userId
+        ]);
 
         return $deletedPosts;
     }

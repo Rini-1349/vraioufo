@@ -1,4 +1,4 @@
-<?php $title='Connexion'; ?>
+<?php $title = 'Vré ù Fô - Connexion'; ?>
 
 <?php ob_start(); ?>
 <div class="container content form_page">

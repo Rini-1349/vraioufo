@@ -25,9 +25,7 @@ try
         {
             if (isset($_POST['login']) AND isset($_POST['pass']) AND !empty($_POST['login']) AND !empty($_POST['pass']))
             {
-                $login=$_POST['login'];
-                $pass=$_POST['pass'];
-                connection($login, $pass);
+                connection($_POST['login'], $_POST['pass']);
             }
             else
             {
@@ -87,7 +85,7 @@ try
                 AND array_key_exists('category', $_POST) AND array_key_exists('true_value', $_POST))
             {
                 if (!empty($_POST['title']) AND !empty($_POST['content']) AND !empty($_POST['category'])
-                    AND ((int)$_POST['category'] != 0) AND (strlen($_POST['true_value']) == 1) )
+                    AND ((int)$_POST['category'] > 0) AND (strlen($_POST['true_value']) == 1) AND strlen($_POST['content']) <= 255 )
                 {
                     $newPost = [
                         'title' => $_POST['title'], 
@@ -97,7 +95,7 @@ try
                         'true_value' => $_POST['true_value']
                     ];
                     
-                    createPost($newPost);
+                    createPost($newPost, $currentPage);
                 }  
                 else
                 {
@@ -112,25 +110,14 @@ try
         }
         elseif ($action == 'vote')
         {
-            // $_GET['postId'] arrive en string : transformer en integer
             if (isset($_POST['vote']) 
                 AND array_key_exists('id', $_SESSION)
-                AND isset($_GET['postId']) AND !empty($_GET['postId']) AND ((int)$_GET['postId'] !== 0))
+                AND isset($_GET['postId']) AND !empty($_GET['postId']) AND ((int)$_GET['postId'] > 0))
             {
-                switch ($_POST['vote'])
-                {
-                    case 0: 
-                        $vote = 0;
-                    break;
-
-                    case 1:
-                        $vote = 1;
-                    break;
-                }
                 $vote = [
                     'userId' => $_SESSION['id'],
-                    'postId' => $_GET['postId'],
-                    'value' => $_POST['vote']
+                    'postId' => (int)$_GET['postId'],
+                    'value' => (int)$_POST['vote']
                 ];
                 submitVote($vote, $currentPage);
             }
@@ -142,9 +129,9 @@ try
         }
         elseif ($action == 'category')
         {
-            if (isset($_GET['categoryId']) AND ((int)$_GET['categoryId'] !== 0))
+            if (isset($_GET['categoryId']) AND ((int)$_GET['categoryId'] > 0))
             {
-                listPosts($currentPage, $message, $_GET['categoryId']);
+                listPosts($currentPage, $message, (int)$_GET['categoryId']);
             }
             else
             {
@@ -167,11 +154,11 @@ try
                     {
                         usersViewAdmin($currentPage, $message);                           
                     }
-                    elseif ($operation == 'deleteUser' AND isset($_GET['userId']) AND (int)$_GET['userId'] != 0)
+                    elseif ($operation == 'deleteUser' AND isset($_GET['userId']) AND (int)$_GET['userId'] > 0)
                     {
                         if ($_GET['userId'] !== $_SESSION['id'])
                         {
-                            deleteUser($_GET['userId'], $currentPage);
+                            deleteUser((int)$_GET['userId'], $currentPage);
                         }
                         else
                         {
@@ -179,9 +166,9 @@ try
                             usersViewAdmin($currentPage, $message);
                         }              
                     }
-                    elseif ($operation == 'deletePost' AND isset($_GET['postId']) AND (int)$_GET['postId'] != 0)
+                    elseif ($operation == 'deletePost' AND isset($_GET['postId']) AND (int)$_GET['postId'] > 0)
                     {
-                        deletePost($_GET['postId'], $currentPage);
+                        deletePost((int)$_GET['postId'], $currentPage);
                     }
                     else
                     {
@@ -215,7 +202,7 @@ try
 }
 catch(Exception $e)
 {
-    if ($e->getCode() == 23000) // Rafraichissement page après vote lance une nouvelle requête
+    if ($e->getCode() == 23000) // (Erreurs SQL, notamment lancement nouvelle requête en rafraichissant la page)
     {
         listPosts(1, $message);
     }

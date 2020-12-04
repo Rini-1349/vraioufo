@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Vré ù Fô">
+        <meta name="description" content="Vré ù Fô" />
+        <meta name="keywords" content="Vré ù Fô, Vrai ou Faux, Vrai, Faux, Deviner, Guess, Voter, Vote, Blague, Joke, Humour, Drôle, Funny, Articles à thèmes, Publier des articles" />
 
         <title><?= $title ?></title>
         <link rel="icon" sizes="192x192" href="public/img/vreufo_favicon.png">
@@ -21,7 +22,7 @@
         <header class="menu">
             <nav class="navbar navbar-expand-md navbar-light fixed-top menu">
                 <a class="navbar-brand mr-auto" href="index.php?action=homepage">
-                    <h1 class="site-title">&iquest;VR&Eacute; &Ugrave; F&Ocirc;?</h1>
+                    <h1 class="site-title text-uppercase">&iquest;Vré ù Fô?</h1>
                     <small class="site-subtitle">La vie n'aura plus aucun secret pour vous ! Votez !</small> 
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,65 +31,44 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
-                        <?php if ($_SESSION)
-                            {
-                            ?>
-                                <li class="nav-item">
-                                    <ul class="connect-subscr">
-                                        <li>
-                                            <a class="nav-link" href="index.php?action=logout">SE D&Eacute;CONNECTER</a>
-                                        </li>
-                                        <?php if ($_SESSION['role'])
-                                            {
-                                        ?>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="index.php?action=admin">ADMINISTRATION</a>
-                                            </li>
-                                        <?php
-                                            } ?>
-                                    </ul>                                
-                                </li>
-                            <?php                       
-                            }
-                            else
-                            {
-                            ?>
-                                <li class="nav-item">
-                                    <ul class="connect-subscr">
-                                        <li>
-                                            <a class="nav-link" href="index.php?action=connection">SE CONNECTER</a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link" href="index.php?action=subscription">S'INSCRIRE</a>
-                                        </li>
+                        <?php if ($_SESSION): ?>
+                            <li class="nav-item">
+                                <ul class="connect-subscr">
+                                    <li>
+                                        <a class="nav-link text-uppercase" href="index.php?action=logout">Se déconnecter</a>
+                                    </li>
+                                    <?php if ($_SESSION['role']): ?>
                                         <li class="nav-item">
-                                            <a class="nav-link" target="_blank" href="https://www.youtube.com/watch?v=TkBLWgSOV18">PARTIR... VITE !</a>
+                                            <a class="nav-link" href="index.php?action=admin">ADMINISTRATION</a>
                                         </li>
-                                    </ul>                                
-                                </li>
-                            <?php
-                            }
-                        ?>
-                        
-                        
+                                    <?php endif ?>
+                                </ul>                                
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <ul class="connect-subscr">
+                                    <li>
+                                        <a class="nav-link" href="index.php?action=connection">SE CONNECTER</a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="index.php?action=subscription">S'INSCRIRE</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" target="_blank" href="https://www.youtube.com/watch?v=TkBLWgSOV18">PARTIR... VITE !</a>
+                                    </li>
+                                </ul>                                
+                            </li>
+                        <?php endif ?>                      
                     </ul>
                 </div>
             </nav>                   
         </header>
-        <?php if (isset($message[0]))
-                {
-                ?>
-                    <div class="alert-danger text-center"><?= $message[0] ?></div>
-
-                <?php
-                }
-                if (isset($message[1]))
-                {
-                ?>
-                    <div class="alert-success text-center"><?= $message[1] ?></div>
-                <?php
-                }
-        ?>
+        <?php if (isset($message[0])): ?>
+            <div class="alert-danger text-center"><?= $message[0] ?></div>
+        <?php endif;
+        if (isset($message[1])): ?>
+            <div class="alert-success text-center"><?= $message[1] ?></div>
+        <?php endif ?>
 
         <div class="container-fluid">
             <?= $content ?>   

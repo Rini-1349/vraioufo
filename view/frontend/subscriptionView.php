@@ -1,4 +1,4 @@
-<?php $title='Inscription'; ?>
+<?php $title = 'Vré ù Fô - Inscription'; ?>
 
 <?php ob_start(); ?>
 
@@ -34,7 +34,7 @@
 					<input type="password" pattern="^\S*(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[0-9])(?=\S*[\W])\S{8,20}$" class="form-control" name="pass" id="pass" aria-describedby="pass_format" required />
 					<div class="invalid-feedback">Format de mot de passe incorrect</div>
 					<small id="pass_format" class="text-muted">
-					Doit contenir entre 8 et 20 caractères dont 1 chiffre, 1 minuscule, 1 majuscule et 1 caractère spécial
+						Doit contenir entre 8 et 20 caractères dont 1 chiffre, 1 minuscule, 1 majuscule et 1 caractère spécial
 					</small>
 				</div>
 				<div class="form-group">
@@ -48,6 +48,7 @@
 		</div>
 	</div>
 </div>
+<!-- Validation du formulaire avant envoi au serveur -->
 <script>
 	(function() 
 	{
@@ -67,6 +68,8 @@
 					const pass = document.getElementById('pass');
 					const pass_confirm = document.getElementById('pass_confirm');
 					const error = document.getElementById('pass_confirm_error');
+
+					// Vérification de la confirmation de mot de passe
 					if (pass_confirm.value != pass.value || pass_confirm.value == '') 
 					{
 						pass_confirm.style.borderColor = '#dc3545';
@@ -87,6 +90,8 @@
 		}, false);
 	})();
 </script>
+
+
 <?php $content=ob_get_clean(); ?>
 
 <?php require('template.php'); ?>

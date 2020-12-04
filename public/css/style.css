@@ -26,7 +26,6 @@
 /* Tout */
 body {
     font-family: 'knockout31', 'Trebuchet MS', 'Lucida Sans Serif';
-    /*overflow-x: hidden;*/
 }
 
 a, a:hover, a:visited{
@@ -43,13 +42,24 @@ a, a:hover, a:visited{
 
 .site-title {
     font-size: 2.3em;
-    color: /*#008f83;*/#f89c2a;
+    color: #f89c2a;
     text-shadow: 3px 4px 1px grey;
 }
 .site-subtitle {
     font-size: 1.1em;
-    color: /*#008f83;*/#f89c2a;
+    color: #f89c2a;
     text-shadow: 3px 3px 1px grey;
+}
+
+@media screen and (max-width: 540px) {
+    .site-subtitle {
+        font-size: 1em;
+    }
+}
+@media screen and (max-width: 460px) {
+    .site-subtitle {
+        font-size: 0.8em;
+    }
 }
 
 .connect-subscr {
@@ -65,28 +75,30 @@ a, a:hover, a:visited{
     color: #626262;
 }
 
-@media screen and (max-width: 540px) {
-    .site-subtitle {
-        font-size: 0.9em;
-    }
-}
-@media screen and (max-width: 460px) {
-    .site-subtitle {
-        font-size: 0.7em;
-    }
+.navbar-toggler {
+    position: absolute;
+    right: 1rem;
+    top: 2.5rem;
 }
 
-/* Alertes */
+.navbar-brand {
+    white-space: normal !important;
+}
+
+
+/* Messages d'lertes */
 .alert-danger, .alert-success {
     margin-top: 9em;
     margin-bottom: -9em;
     padding: 0.5em;
 }
+
 @media screen and (max-width: 380px) {
     .alert-danger, .alert-success {
         margin-top: 10em;
     }
 }
+
 
 /* Footer */
 footer {
@@ -99,27 +111,6 @@ footer {
 .content {
     margin-top: 10em;
     margin-bottom: 3em;
-}
-@media screen and (max-width: 575px) {
-    .content {
-        padding-left: 0px !important;
-        padding-right: 0px !important;
-    }
-}
-@media screen and (max-width: 991px) and (min-width: 576px) {
-    .content {
-        padding: 0% 1%;
-    }
-}
-@media screen and (min-width: 992px) {
-    .content {
-        padding: 0% 8%;
-    }
-}
-@media screen and (min-width: 1200px) {
-    .content {
-        padding: 0% 15%;
-    }
 }
 
 
@@ -136,13 +127,6 @@ footer {
         margin: 0em 0.9em 2em 0.9em;
     }
 }
-
-@media screen and (max-width: 575px) {
-    .score {
-        margin: 0em 2.5em 1em 2.5em;
-    }
-}
-
 
 
 /* Liste des catégpries */
@@ -213,14 +197,6 @@ h3 {
     color: #272727;
     font-size: 1.8em;
 }
-
-@media screen and (max-width: 575px) {
-    article {
-        padding: 1em;
-        margin: 1em 0em;
-    }
-}
-
 
 
 /* Boutons vote */
@@ -325,6 +301,50 @@ h3 {
 }
 
 
+/* Mise en forme du texte */
 .barre {
-    text-decoration:line-through;
+    text-decoration: line-through;
+}
+.back_to_top {
+    font-size: 1.4em;
+}
+
+
+/* Ecrans XL */
+@media screen and (min-width: 1200px) {
+    .content {
+        padding: 0% 15%;
+    }
+}
+
+/* Ecrans LG et + */
+@media screen and (min-width: 992px) {
+    .content {
+        padding: 0% 8%;
+    }
+}
+
+/* Ecrans SM et MD */
+@media screen and (min-width: 576px) and (max-width: 992px) {
+    .content {
+        padding: 0% 1%;
+    }
+}
+
+/* Ecrans XS */
+@media screen and (max-width: 575px) {
+    .content {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    .score {
+        margin: 0em 2.5em 1em 2.5em;
+    }
+    article {
+        padding: 1em;
+        margin: 1em 0em;
+    }
+    .navbar-toggler {
+        top: 1.5rem;
+    }
 }

@@ -8,11 +8,10 @@ class Users extends Manager
     public function loginAlreadyTaken($pseudo, $eMail)
     {
         $db = $this->dbConnect();
-        $user = $db->prepare('SELECT * FROM users WHERE pseudo=? OR email=?');
-        $user->execute(array($pseudo, $eMail));
-        $foundLines = $user->rowCount();
+        $user = $db->prepare('SELECT * FROM users WHERE pseudo = ? OR email = ?');
+        $user->execute([$pseudo, $eMail]);
 
-        return (bool)$foundLines;
+        return (bool)$user->rowCount();
     }
 
     // Ajouter un utilisateur
@@ -34,26 +33,24 @@ class Users extends Manager
     public function getUser($login)
     {
         $db = $this->dbConnect();
-        $user = $db->prepare('SELECT * FROM users WHERE pseudo= :pseudo OR email= :email');
-        $user->execute(array(
+        $user = $db->prepare('SELECT * FROM users WHERE pseudo = :pseudo OR email = :email');
+        $user->execute([
             'pseudo' => $login,
             'email' => $login
-        ));
-        $foundUser = $user->fetch();
+        ]);
 
-        return $foundUser;
+        return $user->fetch();
     }
 
     public function getUserById($userId)
     {
         $db = $this->dbConnect();
         $user = $db->prepare('SELECT * FROM users WHERE id = :userId');
-        $user->execute(array(
+        $user->execute([
             'userId' => $userId
-        ));
-        $foundUser = $user->fetch();
+        ]);
 
-        return $foundUser;
+        return $user->fetch();
     }
 
 
@@ -64,15 +61,17 @@ class Users extends Manager
     public function countUsers()
     {
         $db = $this->dbConnect();
-        $users = $db->query('SELECT * FROM users ');
+        $users = $db->query('SELECT * FROM users');
 
         return $users->rowCount();
     }
     
-    public function listUsers()
+    public function listUsers($firstUser)
     {
         $db = $this->dbConnect();
-        $users = $db->query('SELECT * FROM users');
+        $users = $db->query('SELECT * FROM users
+                            ORDER BY id
+                            LIMIT ' . $firstUser . ', 16');
         
         return $users;
     }
@@ -81,8 +80,7 @@ class Users extends Manager
     {
         $db = $this->dbConnect();
         $user = $db->prepare('DELETE FROM users WHERE id = :userId');
-        $deletedUser = $user->execute(['userId' => $userId]);
 
-        return $deletedUser;
+        return $user->execute(['userId' => $userId]);
     }
 }
