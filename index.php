@@ -208,6 +208,6 @@ catch(Exception $e)
     }
     else
     {
-        echo 'Erreur : ' . $e->getMessage() . "\n" . $e->getCode();
+        echo 'Erreur : ' . $e->getMessage() . "\n" . $e->getCode() . '. Merci de contacter le propriétaire du site';
     }
 }

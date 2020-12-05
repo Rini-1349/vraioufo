@@ -22,7 +22,7 @@
         
                 <tbody>
                     <tr>
-                        <th></th>
+                        <th>Article</th>
                         <th>Catégorie</th>
                         <th>Créé par</th>
                         <th>Opérations</th>
